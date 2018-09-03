@@ -52,7 +52,7 @@ authRoutes.post("/signup", (req, res, next) => {
       if (err) {
         res.render("auth/signup", { message: "Something went wrong" });
       } else {
-        req.login(newUser, function(err) {
+        req.login(newUser, function (err) {
           if (err) { return next(err); }
           return res.send(req.user);
         });
