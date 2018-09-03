@@ -19,8 +19,6 @@ const userSchema = new Schema({
       type: String,
     },
   picPath: String,
-  facebookId: String,
-  googleId: String,
 }, {
   timestamps: {
     createdAt: 'created_at',

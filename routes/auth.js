@@ -44,14 +44,19 @@ authRoutes.post("/signup", (req, res, next) => {
     const newUser = new User({
       username,
       password: hashPass,
-      role: "teacher"
     });
+
+    //req.login sets the newUser to the req.user, that means the user will
+    // be logged in immediately after signing up
 
     newUser.save((err) => {
       if (err) {
         res.render("auth/signup", { message: "Something went wrong" });
       } else {
-        res.redirect("/");
+        req.login(newUser, function (err) {
+          if (err) { return next(err); }
+          return res.send(req.user);
+        });
       }
     });
   });
