@@ -24,17 +24,15 @@ authRoutes.get("/signup", (req, res, next) => {
 });
 
 authRoutes.post("/signup", (req, res, next) => {
-  const username = req.body.username;
-  const password = req.body.password;
-  const rol = req.body.role;
-  if (username === "" || password === "") {
-    res.render("auth/signup", { message: "Indicate username and password" });
+  const {username, email, password} = req.body
+  if (username === "" || password === "" || email === "") {
+    res.render("auth/signup", { message: "Indicate username, email and password" });
     return;
   }
 
-  User.findOne({ username }, "username", (err, user) => {
+  User.findOne({ email }, "email", (err, user) => {
     if (user !== null) {
-      res.render("auth/signup", { message: "The username already exists" });
+      res.render("auth/signup", { message: "The email already has an account" });
       return;
     }
 
@@ -44,6 +42,7 @@ authRoutes.post("/signup", (req, res, next) => {
     const newUser = new User({
       username,
       password: hashPass,
+      email,
     });
 
     //req.login sets the newUser to the req.user, that means the user will
@@ -60,6 +59,23 @@ authRoutes.post("/signup", (req, res, next) => {
       }
     });
   });
+});
+
+authRoutes.post("/:id/update", (req, res, next) => {
+  const {username, description, expertIn} = req.body
+  if (username === "") {
+    res.render("auth/update", { message: "Please enter a User name!" });
+    return;
+  }
+
+  User.findByIdAndUpdate(req.params.id, {
+    username,
+    description,
+    
+  },{$push: {expertIn}}, {new: true}).then(user => {
+    res.send(user)
+  })
+  
 });
 
 authRoutes.get("/logout", (req, res) => {

@@ -1,11 +1,14 @@
 const express = require('express');
 const router  = express.Router();
+const User = require("../models/User");
 
 
 
 //add ":id" later to the route, when we have models
 router.get('/profile/:id', (req, res, next) => {
-  res.render('foodie/profile');
+  User.findById(req.params.id).then(user => {
+    res.render('foodie/profile', {user});
+  }) 
 });
 
 
