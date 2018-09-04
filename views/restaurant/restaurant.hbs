@@ -1,12 +1,13 @@
 <div class="bg-white">
-  <h3>(Restaurant Name)</h3>
+  <h3>{{restaurant.name}}</h3>
   <div id="restaurant-map">
-    (#restaurant-image)
+    <p>Google Map</p>
   </div>
   <div class="restaurant-image">
-    (#restaurant-image)
+    <img src="{{restaurant.picPath}}" alt="" width="400">
   </div>
   <div class="restaurant-info">
-    (#restaurant-info)
+    <p>The description goes here</p>
+    {{restaurant.description}}
   </div>
 </div>

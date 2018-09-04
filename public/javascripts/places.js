@@ -52,7 +52,7 @@ client.search(searchRequest).then(response => {
 let phone = "+493040044289"
 
 
-function getRightPlace(phone) {
+const getRightPlace = function (phone) {
 return new Promise(function(resolve, reject) {
 client.phoneSearch({phone: phone})
 .then(response => {
@@ -78,6 +78,9 @@ client.phoneSearch({phone: phone})
 getRightPlace(phone).then(result => {
     console.log(result)
 })
+
+
+module.exports =  getRightPlace
 
 
 

@@ -1,6 +1,8 @@
 const express = require('express');
 const router  = express.Router();
 const User = require("../models/User");
+const Rest = require("../models/Restaurant")
+const Rec = require("../models/Recommend")
 const getRightPlace = require("../public/javascripts/places.js");
 
 
@@ -65,16 +67,72 @@ router.get("/:id/recommendations", (req,res, next) => {
 //we don't need to search the Database for the right User here,
 //because of the middleWare protection
 router.get("/:id/recommendations", (req, res, next) => {
-
-  // getRightPlace("+493040044289").then(result => {
-  //   console.log("Hello", result)
-  // })
-
   res.render("foodie/recommendations", {
-    user: req.user
+    user: req.user,
+  })
+
+})
+
+router.get("/:id/recommendations/create", (req, res, next) => {
+
+  getRightPlace("+493040044289").then(result => {
+    console.log("Hello", result)
+    res.render("foodie/edit", {
+      user: req.user,
+      restaurant: result,
+    })
   })
 })
 
+router.post("/:id/recommendations/create", (req, res, next) => {
+  let {name,phone,picPath,address,coordinates,comment} = req.body;
+
+  const arrAddress = address.split(",")
+  const arrCoordinates = coordinates.split(",")
+  const numberArray = arrCoordinates.map(el => {
+    return parseFloat(el);
+  })
+
+  
+  
+
+  Rest.findOne({phone}).then(rest => {
+
+    console.log("Result",rest)
+
+    if (rest === null) {
+      new Rest({
+      name,
+      phone,
+      picPath,
+      address : arrAddress,
+      location: {
+      type: "Point",
+      coordinates: numberArray,
+    }
+  }).save().then(result => {
+
+    User.findById(req.params.id).then(author => {
+      console.log(result)
+      new Rec({
+        comment,
+        author: author.username,
+        restName: result.name
+      }).save().then(comment => {
+        Rest.findByIdAndUpdate(result._id, { $push: { recommendation: comment._id } })
+        .then(restaurant => {
+          console.log("This is the restaurant", restaurant)
+        })
+      })
+    })
+    res.redirect(`/restaurant/${result._id}`)
+  })
+  }
+  else {res.send("Already made")}
+  })
+ 
+
+})
 
 
 

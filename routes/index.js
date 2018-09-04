@@ -15,4 +15,13 @@ router.get('/', (req, res, next) => {
   })
 });
 
+router.get("/restaurant/:id", (req, res, next) => {
+  
+  Restaurant.findById(req.params.id).then(restaurant => {
+    res.render("restaurant/restaurant", {
+        restaurant
+    })
+  })
+})
+
 module.exports = router;
