@@ -13,6 +13,8 @@
 
   <br><br>
   
+
+  
   <ul>
     {{#each expArr}}
       {{#if this.value}} 
@@ -24,15 +26,19 @@
     <input name="expertIn" id="expertIn" type="text" class="hidden">
   </ul>
 
-      
-  
-  <br><br>
-
   {{#if message }}
+    <br><br>
     <div class="error-message">{{ message }}</div>
+    <br><br>
   {{/if}}
 
-  <br><br>
-
   <button>Update account</button>
+
+  <img src="{{user.picPath}}" alt="" width="100px">
   </form>
+  <form action="/auth/{{user._id}}/update/picture" method="POST" encType="multipart/form-data">
+  <label for="picture">Profile Picture</label>
+  <input type="file" name="picture" class="form-control" placeholder="No file selected">
+  <button>change Picture</button>
+  </form>
+  <br><br>

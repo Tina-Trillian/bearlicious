@@ -36,6 +36,7 @@ authRoutes.post("/signup", (req, res, next) => {
       return;
     }
 
+
     const salt = bcrypt.genSaltSync(bcryptSalt);
     const hashPass = bcrypt.hashSync(password, salt);
 
@@ -61,7 +62,28 @@ authRoutes.post("/signup", (req, res, next) => {
   });
 });
 
+//updated the picture seperatley and redirects to the same page 
+//might be a problem that the inputs from the user disappears after they
+//"refresh the page"
+authRoutes.post("/:id/update/picture", (req, res, next) => {
+
+  console.log("URL: ", req.url)
+
+  req.files.picture.mv(`public/images/profilePics/${req.files.picture.name}`)
+
+
+  User.findByIdAndUpdate(req.params.id, {
+    picPath : `/images/profilePics/${req.files.picture.name}`
+ }, {new: true}).then(user => {
+   res.redirect(`/foodie/${req.params.id}/settings`)
+ })
+})
+
+//picture update needs to be before(!) normal update, otherwise throws
+//an error, because it will always got the normal update route
+
 authRoutes.post("/:id/update", (req, res, next) => {
+  console.log(req.url)
   const {username, description, expertIn} = req.body
   if (username === "") {
     res.render("auth/update", { message: "Please enter a User name!" });
@@ -78,8 +100,9 @@ authRoutes.post("/:id/update", (req, res, next) => {
   }, {new: true}).then(user => {
     res.redirect("/")
   })
-  
 });
+
+
 
 authRoutes.get("/logout", (req, res) => {
   req.logout();

@@ -21,6 +21,7 @@ const userSchema = new Schema({
   picPath: String,
   facebookId: String,
   googleId: String,
+  bookmarks: [Schema.Types.ObjectId],
 }, {
   timestamps: {
     createdAt: 'created_at',
