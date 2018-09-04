@@ -1,5 +1,5 @@
 const yelp = require('yelp-fusion');
-const axios = require('axios');
+
 
 // Place holder for Yelp Fusion's API Key. Grab them
 // from https://www.yelp.com/developers/v3/manage_app
@@ -78,5 +78,7 @@ client.phoneSearch({phone: phone})
 getRightPlace(phone).then(result => {
     console.log(result)
 })
+
+
 
 
