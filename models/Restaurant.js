@@ -13,6 +13,7 @@ const restSchema = new Schema({
     type: String,
   },
   picPath: String,
+  recommendation: [Schema.Types.ObjectId]
 });
 
 restSchema.index({ location: '2dsphere' });

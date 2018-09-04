@@ -24,22 +24,24 @@ router.get('/:id',(req, res, next) => {
 //because of the middleWare protection
 router.get("/:id/settings", (req, res, next) => {
   
-  const foodObj = {}
+  const expArr = []
   const foodArr = User.schema.tree.expertIn.enum
-  console.log(foodArr)
   foodArr.map(el => {
-    console.log(el)
+    let foodObj = {}
+    foodObj["key"] = el;
     if (req.user.expertIn.indexOf(el) > -1) {
-      foodObj[el] = true
+      foodObj["value"] = true
     }
     else {
-      foodObj[el] = false
+      foodObj["value"] = false
     }
+    expArr.push(foodObj)
   })
 
+  console.log(expArr)
   res.render("foodie/settings", {
     user: req.user,
-    foodObj,
+    expArr,
   })
 })
 
