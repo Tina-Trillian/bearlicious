@@ -2,6 +2,12 @@
   <div class="tagline">
     <h4>Find the best places to eat, drink in Berlin. Access over 1 million tips from local foodies.</h4>
   </div>
+  <div id="index-res">
+    {{#each restaurants}}
+    <p>{{this.name}}</p>
+    <p>{{this.location.coordinates}}</p>
+    {{/each}}
+  </div>
   <div class="food-categories">
     <ul>
       <li class="food1"><a href="#">food1</a></li>

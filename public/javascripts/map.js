@@ -1,6 +1,10 @@
 // starting google map on index page
 // with user's position // 
+
+
+
 function startMap() {
+
   const berlin = {
     lat: 52.519459,
     lng: 13.401106
@@ -31,6 +35,8 @@ function startMap() {
 
   // show locations of the restaurants of the category the user selected.
 
+
+
   const sampleRes = {
     name: "Sushi Restaurants",
     location: {
@@ -45,6 +51,8 @@ function startMap() {
     }
   };
 
+
+  // creating markers for restaurants
   const sampleResMarker = new google.maps.Marker({
     position: {
       lat: sampleRes.location.coordinates[0],
@@ -62,6 +70,29 @@ function startMap() {
     map: map,
     title: sampleRes2.name
   })
+
+  // content text on the infoWindows
+  const sampleResText = '<a href="/restaurant/">' + sampleRes.name +
+    '</a>';
+
+  const sampleRes2Text = '<a href="/restaurant/">' + sampleRes2.name +
+    '</a>';
+
+  const infowindow = new google.maps.InfoWindow({
+    content: sampleResText
+  });
+
+  const infowindow2 = new google.maps.InfoWindow({
+    content: sampleRes2Text
+  });
+
+  sampleResMarker.addListener('click', function () {
+    infowindow.open(map, sampleResMarker);
+  });
+
+  sampleResMarker2.addListener('click', function () {
+    infowindow2.open(map, sampleResMarker2);
+  });
 
   sampleResMarker.setMap(map);
   sampleResMarker2.setMap(map);
