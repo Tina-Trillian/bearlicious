@@ -32,7 +32,7 @@ nav > ul > li {
   background-color: #eee;
   margin: 0 auto; }
 
-footer {
-  text-align: center; }
+.hidden {
+  display: none; }
 
 /*# sourceMappingURL=style.css.map */
