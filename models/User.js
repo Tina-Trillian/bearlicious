@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Schema   = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 //User can sign-in with facebook and google as well
 //that is why the password etc. is not required
@@ -14,20 +14,20 @@ const userSchema = new Schema({
   expertIn: {
     type: [String],
     enum: ["Pizza", "Burger", "Vegan", "Sushi", "German", "Indian", "Thai", "Vietnamese", "Craft Beer", "Others"],
-   },
+  },
   description: {
-      type: String,
-    },
+    type: String,
+  },
   picPath: String,
   facebookId: String,
   googleId: String,
   bookmarks: [Schema.Types.ObjectId],
 }, {
-  timestamps: {
-    createdAt: 'created_at',
-    updatedAt: 'updated_at'
-  }
-});
+    timestamps: {
+      createdAt: 'created_at',
+      updatedAt: 'updated_at'
+    }
+  });
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;
