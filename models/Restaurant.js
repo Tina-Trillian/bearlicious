@@ -3,7 +3,8 @@ const Schema = mongoose.Schema;
 
 const restSchema = new Schema({
   name: String,
-  address: String,
+  phone: String,
+  address: [String],
   location: { type: String, coordinates: [Number] },
   category: {
     type: [String],
