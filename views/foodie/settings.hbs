@@ -13,22 +13,18 @@
 
   <br><br>
   
-  {{#each foodObj}}
-  <li>yeas</li>
-  {{/each}}
-    <ul>
-     <li class=“food1”><button type="button" class="btn toggle off">Pizza</button><input id="expertIn" type="text" name="expertIn"></li>
-     <li class=“food2”><button type="button" class="btn toggle off">Burger</button></li>
-     <li class=“food3”><button type="button" class="btn toggle off">Craft Beer</button></li>
-     <li class=“food4”><button type="button" class="btn toggle off">Vegan</button></li>
-     <li class=“food5”><button type="button" class="btn toggle off">Sushi</button></li>
-     <li class=“food6”><button type="button" class="btn toggle off">German</button></li>
-     <li class=“food7”><button type="button" class="btn toggle off">Indian</button></li>
-     <li class=“food8”><button type="button" class="btn toggle off">Thai</button></li>
-     <li class=“food9”><button type="button" class="btn toggle off">Vietnamese</button></li>
-    <li class=“food10”><button type="button" class="btn toggle off">Others</button></li>
- 
-   </ul>
+  <ul>
+    {{#each expArr}}
+      {{#if this.value}} 
+        <li class=“{{this.key}}”><button type="button" class="btn toggle on">{{this.key}}</button>
+      {{else}}
+        <li class=“{{this.key}}”><button type="button" class="btn toggle off">{{this.key}}</button>
+      {{/if}}
+    {{/each}}
+    <input name="expertIn" id="expertIn" type="text" class="hidden">
+  </ul>
+
+      
   
   <br><br>
 

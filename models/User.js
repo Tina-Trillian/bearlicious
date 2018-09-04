@@ -13,9 +13,9 @@ const userSchema = new Schema({
   email: String,
   expertIn: {
     type: [String],
-    enum: ["pizza", "burger", "vegan", "sushi", "german", "indian", "thai", "vietnamese", "craft beer", "others"],
+    enum: ["Pizza", "Burger", "Vegan", "Sushi", "German", "Indian", "Thai", "Vietnamese", "Craft Beer", "Others"],
    },
-  decription: {
+  description: {
       type: String,
     },
   picPath: String,

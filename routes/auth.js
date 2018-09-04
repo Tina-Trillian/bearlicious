@@ -69,13 +69,14 @@ authRoutes.post("/:id/update", (req, res, next) => {
   }
   let clean = expertIn.split(",")
   clean = clean.filter(el => el.length > 0)
+
   
   User.findByIdAndUpdate(req.params.id, {
      username,
      description,
      expertIn : clean,
   }, {new: true}).then(user => {
-    res.send(user)
+    res.redirect("/")
   })
   
 });
