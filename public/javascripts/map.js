@@ -1,10 +1,7 @@
 // starting google map on index page
 // with user's position // 
 
-
-
 function startMap() {
-
   const berlin = {
     lat: 52.519459,
     lng: 13.401106
@@ -35,8 +32,6 @@ function startMap() {
 
   // show locations of the restaurants of the category the user selected.
 
-
-
   const sampleRes = {
     name: "Sushi Restaurants",
     location: {
@@ -51,53 +46,120 @@ function startMap() {
     }
   };
 
+  // creating array of each restaurant data with the name and the location
+  const array = [];
+  const locArray = [];
+  const resName = document.querySelectorAll("#res-name")
+  const location = document.querySelectorAll("#res-location")
 
-  // creating markers for restaurants
-  const sampleResMarker = new google.maps.Marker({
-    position: {
-      lat: sampleRes.location.coordinates[0],
-      lng: sampleRes.location.coordinates[1]
-    },
-    map: map,
-    title: "hello"
+  resName.forEach(function (item) {
+    array.push([{ name: item.innerHTML }])
   })
 
-  const sampleResMarker2 = new google.maps.Marker({
-    position: {
-      lat: sampleRes2.location.coordinates[0],
-      lng: sampleRes2.location.coordinates[1]
-    },
-    map: map,
-    title: sampleRes2.name
+  location.forEach(function (item) {
+    locArray.push(item.innerHTML.split(","))
   })
 
-  // content text on the infoWindows
-  const sampleResText = '<a href="/restaurant/">' + sampleRes.name +
-    '</a>';
+  for (let i = 0; i < locArray.length; i++) {
+    array[i].push({
+      lat: parseFloat(locArray[i][0]),
+      lng: parseFloat(locArray[i][1]),
+    })
+  }
 
-  const sampleRes2Text = '<a href="/restaurant/">' + sampleRes2.name +
-    '</a>';
+  // console.log("array: ", array)
 
-  const infowindow = new google.maps.InfoWindow({
-    content: sampleResText
-  });
+  /// creating array of objects for google.map.Marker
+  const markArr = [];
+  for (let i = 0; i < array.length; i++) {
+    markArr.push({
+      position: {
+        lat: array[i][1].lat,
+        lng: array[i][1].lng,
+      },
+      map: map,
+      title: array[i][0].name
+    })
+  }
 
-  const infowindow2 = new google.maps.InfoWindow({
-    content: sampleRes2Text
-  });
+  // console.log("markArr: ", markArr);
 
-  sampleResMarker.addListener('click', function () {
-    infowindow.open(map, sampleResMarker);
-  });
-
-  sampleResMarker2.addListener('click', function () {
-    infowindow2.open(map, sampleResMarker2);
-  });
-
-  sampleResMarker.setMap(map);
-  sampleResMarker2.setMap(map);
+  markArr.forEach(function (item) {
+    const marker = new google.maps.Marker(item);
+    marker.setMap(map);
+    const infoWindow = new google.maps.InfoWindow({
+      content: '<a href="/restaurant/">' + item.title +
+        '</a>'
+    });
+    marker.addListener('click', function () {
+      infoWindow.open(map, marker)
+    })
+  })
 
 }
 
 startMap();
+
+
+//// code for sample markers
+
+  // creating markers for restaurants ( sample )
+  // const sampleResMarker = new google.maps.Marker({
+  //   position: {
+  //     lat: sampleRes.location.coordinates[0],
+  //     lng: sampleRes.location.coordinates[1]
+  //   },
+  //   map: map,
+  //   title: "hello"
+  // })
+
+  // console.log("sampleResMarker: ", sampleResMarker);
+
+  // const sampleResMarker2 = new google.maps.Marker({
+  //   position: {
+  //     lat: sampleRes2.location.coordinates[0],
+  //     lng: sampleRes2.location.coordinates[1]
+  //   },
+  //   map: map,
+  //   title: sampleRes2.name
+  // })
+
+  // sampleResMarker.setMap(map);
+  // sampleResMarker2.setMap(map);
+
+
+    // for (let i = 0; i < markArr; i++) {
+  //   new google.maps.Marker(markArr[i]).setMap(map);
+  // }
+  // new google.maps.Marker(markArr[0]).setMap(map);
+  // new google.maps.Marker(markArr[1]).setMap(map);
+  // new google.maps.Marker(markArr[2]).setMap(map);
+
+
+    // this is working prototype (first iteration)
+  // markArr.forEach(function (item) {
+  //   new google.maps.Marker(item).setMap(map);
+  //   new google.maps.Marker(item).addListener('click', function () {
+  //     console.log("marker was clicked")
+  //   })
+  // })
+
+
+  // const infowindow = new google.maps.InfoWindow({
+  //   content: '<a href="/restaurant/">' + sampleRes.name +
+  //     '</a>'
+  // });
+
+  // const infowindow2 = new google.maps.InfoWindow({
+  //   content: '<a href="/restaurant/">' + sampleRes2.name +
+  //     '</a>'
+  // });
+
+  // sampleResMarker.addListener('click', function () {
+  //   infowindow.open(map, sampleResMarker);
+  // });
+
+  // sampleResMarker2.addListener('click', function () {
+  //   infowindow2.open(map, sampleResMarker2);
+  // });
 
