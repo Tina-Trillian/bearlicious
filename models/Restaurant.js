@@ -3,9 +3,8 @@ const Schema = mongoose.Schema;
 
 const restSchema = new Schema({
   name: String,
-  phone: String,
-  address: [String],
-  location: { type: String, coordinates: [Number] },
+  address: String,
+  location: { type: { type: String }, coordinates: [Number] },
   category: {
     type: [String],
     enum: ["Pizza", "Burger", "Vegan", "Sushi", "German", "Indian", "Thai", "Vietnamese", "Craft beer", "Others"],

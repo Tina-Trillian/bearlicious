@@ -9,24 +9,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //buttons need to be "pushed" if the User is expert in
   //and input needs to have the correct value
-    if (window.location.href.indexOf('settings') > -1) {
-      $("#expertIn").val();
-      let arr = $(".toggle");
-      let innerVal = ""
+  if (window.location.href.indexOf('settings') > -1) {
+    $("#expertIn").val();
+    let arr = $(".toggle");
+    let innerVal = ""
     for (let i = 0; i < arr.length; i++) {
       if ($(arr[i]).hasClass("on")) {
         innerVal += "," + $(arr[i]).text()
-      } 
+      }
     }
-    $("#expertIn").val(innerVal) 
-    }
+    $("#expertIn").val(innerVal)
+  }
 
-  $(".toggle").on("click", function() {
+  $(".toggle").on("click", function () {
     $(this).toggleClass("on off");
     if ($(this).hasClass("on")) {
-    const food = $(this).text();
-    const before = $("#expertIn").val()
-    $("#expertIn").val(before + "," + food)
+      const food = $(this).text();
+      const before = $("#expertIn").val()
+      $("#expertIn").val(before + "," + food)
     }
     else if ($(this).hasClass("off")) {
       const food = $(this).text();
@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
       $("#expertIn").val(after)
     }
   })
-
 
 
 }, false);
