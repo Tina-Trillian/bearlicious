@@ -68,6 +68,9 @@ authRoutes.post("/:id/update", (req, res, next) => {
     return;
   }
 
+  console.log("Req Body", req.body)
+  
+
   User.findByIdAndUpdate(req.params.id, {
     username,
     description,
