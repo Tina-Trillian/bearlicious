@@ -114,12 +114,27 @@ router.post("/:id/recommendations/create", (req, res, next) => {
       comment: comment,
       author: req.user.username,
       restName: newRes.name,
+      author_id: req.user._id,
         })
       newRes.save()
       
       res.redirect(`/restaurant/${newRes._id}`)
+    }
+  else {
+  
+      rest.recommendation = rest.recommendation.concat([{
+        comment: comment,
+        author: req.user.username,
+        restName: rest.name,
+        author_id: req.user._id,
+      }])
+
+      rest.save();
+
+    console.log("22222",rest.recommendation)
+
+    res.redirect(`/restaurant/${rest._id}`)
   }
-  else {res.send("Already made")}
   })
  
 

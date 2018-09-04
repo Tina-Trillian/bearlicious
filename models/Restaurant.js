@@ -5,6 +5,7 @@ const recommendSchema = new Schema({
   restName: String,
   author: String,
   comment: String,
+  author_id: Schema.Types.ObjectId,
 },{
   timestamps: {
     createdAt: 'created_at',
