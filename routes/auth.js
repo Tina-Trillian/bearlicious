@@ -67,15 +67,14 @@ authRoutes.post("/:id/update", (req, res, next) => {
     res.render("auth/update", { message: "Please enter a User name!" });
     return;
   }
-
-  console.log("Req Body", req.body)
+  let clean = expertIn.split(",")
+  clean = clean.filter(el => el.length > 0)
   
-
   User.findByIdAndUpdate(req.params.id, {
-    username,
-    description,
-    
-  },{$push: {expertIn}}, {new: true}).then(user => {
+     username,
+     description,
+     expertIn : clean,
+  }, {new: true}).then(user => {
     res.send(user)
   })
   
