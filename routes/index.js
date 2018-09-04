@@ -8,7 +8,10 @@ router.get('/', (req, res, next) => {
   Restaurant.find({}, (err, restaurants) => {
     console.log(restaurants)
     if (err) throw err;
-    res.render('index', { restaurants }); // send restaurants  
+    res.render('index', {
+      restaurants,
+      user: req.user
+    }); // send restaurants  
   })
 });
 

@@ -1,7 +1,8 @@
+
 document.addEventListener('DOMContentLoaded', () => {
 
   console.log('IronGenerator JS imported successfully!');
-
+  
 
   //to toggle the button from "off" to "on" and add and remove values 
   //to the hidden intput, so it gets send with the req.body

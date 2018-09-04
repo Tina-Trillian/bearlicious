@@ -7,6 +7,7 @@
     "dev": "DEBUG=bearlicious:* nodemon ./bin/www"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "bcrypt": "^1.0.3",
     "body-parser": "~1.18.2",
     "connect-ensure-login": "^0.1.1",
@@ -24,7 +25,8 @@
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",
     "passport-local": "^1.0.0",
-    "serve-favicon": "~2.4.5"
+    "serve-favicon": "~2.4.5",
+    "yelp-fusion": "^2.0.3"
   },
   "devDependencies": {
     "nodemon": "^1.12.1"

@@ -18,10 +18,10 @@
     </ul>
     <div id="header-menu">
       <ul>
-        <li><a href="/foodie/profile/:id">Profile</a></li>
-        <li><a href="/foodie/:id/recommendation">Recommendation</a></li>
-        <li><a href="/foodie/:id/bookmark">Bookmark</a></li>
-        <li><a href="/foodie/:id/settings">Settings</a></li>
+        <li><a href="/foodie/profile/{{user._id}}">Profile</a></li>
+        <li><a href="/foodie/{{user._id}}/recommendations">Recommendation</a></li>
+        <li><a href="/foodie/{{user._id}}/bookmarks">Bookmark</a></li>
+        <li><a href="/foodie/{{user._id}}/settings">Settings</a></li>
         <li><a href="/auth/logout">Log Out</a></li>
       </ul>
     </div>

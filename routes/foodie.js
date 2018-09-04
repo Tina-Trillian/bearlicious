@@ -1,7 +1,7 @@
 const express = require('express');
 const router  = express.Router();
 const User = require("../models/User");
-
+const getRightPlace = require("../public/javascripts/places.js");
 
 
 //add ":id" later to the route, when we have models
@@ -14,7 +14,7 @@ router.get('/profile/:id', (req, res, next) => {
 
 //check if user is signed in and the right one
 router.get('/:id',(req, res, next) => {
-  if (!req.user || req.user._id !== req.params.id) {
+  if (!req.user || req.user.id !== req.params.id) {
     res.redirect("/")
   }
   else next();
@@ -48,7 +48,7 @@ router.get("/:id/settings", (req, res, next) => {
 //we don't need to search the Database for the right User here,
 //because of the middleWare protection
 router.get("/:id/bookmarks", (req, res, next) => {
-  res.render("foodie/bookmarks", {
+  res.render("foodie/bookmark", {
     user: req.user
   })
 })
@@ -56,8 +56,7 @@ router.get("/:id/bookmarks", (req, res, next) => {
 //when the user wants to access this route and does NOT have expertIn or
 //description values, he gets redirected to the setting page
 router.get("/:id/recommendations", (req,res, next) => {
-  console.log(req.user);
-  if (!req.user.expertIn.length === 0 || !req.user.decription) {
+  if (req.user.expertIn.length === 0 || !req.user.description) {
     res.redirect(`/foodie/${req.user._id}/settings`)
   }
   else next();
@@ -66,6 +65,11 @@ router.get("/:id/recommendations", (req,res, next) => {
 //we don't need to search the Database for the right User here,
 //because of the middleWare protection
 router.get("/:id/recommendations", (req, res, next) => {
+
+  // getRightPlace("+493040044289").then(result => {
+  //   console.log("Hello", result)
+  // })
+
   res.render("foodie/recommendations", {
     user: req.user
   })
