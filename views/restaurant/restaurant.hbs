@@ -11,3 +11,11 @@
     {{restaurant.description}}
   </div>
 </div>
+<h4>Recommendations</h4>
+<div class="bg-white">
+ {{#each restaurant.recommendation}}
+ <p>{{this.comment}}</p>
+ <p><i>by {{this.author}}</i></p>
+ <p>created {{this.updated_at}}</p>
+ {{/each}}
+</div>

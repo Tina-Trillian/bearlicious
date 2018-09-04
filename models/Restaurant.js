@@ -1,9 +1,21 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const recommendSchema = new Schema({
+  restName: String,
+  author: String,
+  comment: String,
+},{
+  timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
+  }
+});
+
 const restSchema = new Schema({
   name: String,
   address: String,
+  phone: String,
   location: { type: { type: String }, coordinates: [Number] },
   category: {
     type: [String],
@@ -13,7 +25,7 @@ const restSchema = new Schema({
     type: String,
   },
   picPath: String,
-  recommendation: [Schema.Types.ObjectId]
+  recommendation: [recommendSchema]
 });
 
 restSchema.index({ location: '2dsphere' });

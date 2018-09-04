@@ -76,7 +76,6 @@ router.get("/:id/recommendations", (req, res, next) => {
 router.get("/:id/recommendations/create", (req, res, next) => {
 
   getRightPlace("+493040044289").then(result => {
-    console.log("Hello", result)
     res.render("foodie/edit", {
       user: req.user,
       restaurant: result,
@@ -94,14 +93,14 @@ router.post("/:id/recommendations/create", (req, res, next) => {
   })
 
   
-  
+  console.log("Phone", phone)
 
-  Rest.findOne({phone}).then(rest => {
+  Rest.findOne({phone: phone}).then(rest => {
 
     console.log("Result",rest)
 
     if (rest === null) {
-      new Rest({
+      const newRes = new Rest({
       name,
       phone,
       picPath,
@@ -109,24 +108,16 @@ router.post("/:id/recommendations/create", (req, res, next) => {
       location: {
       type: "Point",
       coordinates: numberArray,
-    }
-  }).save().then(result => {
-
-    User.findById(req.params.id).then(author => {
-      console.log(result)
-      new Rec({
-        comment,
-        author: author.username,
-        restName: result.name
-      }).save().then(comment => {
-        Rest.findByIdAndUpdate(result._id, { $push: { recommendation: comment._id } })
-        .then(restaurant => {
-          console.log("This is the restaurant", restaurant)
+        }
+       })
+      newRes.recommendation.push({
+      comment: comment,
+      author: req.user.username,
+      restName: newRes.name,
         })
-      })
-    })
-    res.redirect(`/restaurant/${result._id}`)
-  })
+      newRes.save()
+      
+      res.redirect(`/restaurant/${newRes._id}`)
   }
   else {res.send("Already made")}
   })
