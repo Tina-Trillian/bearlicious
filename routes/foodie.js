@@ -23,9 +23,23 @@ router.get('/:id',(req, res, next) => {
 //we don't need to search the Database for the right User here,
 //because of the middleWare protection
 router.get("/:id/settings", (req, res, next) => {
-  console.log("Session User: ", req.user)
+  
+  const foodObj = {}
+  const foodArr = User.schema.tree.expertIn.enum
+  console.log(foodArr)
+  foodArr.map(el => {
+    console.log(el)
+    if (req.user.expertIn.indexOf(el) > -1) {
+      foodObj[el] = true
+    }
+    else {
+      foodObj[el] = false
+    }
+  })
+
   res.render("foodie/settings", {
-    user: req.user
+    user: req.user,
+    foodObj,
   })
 })
 
