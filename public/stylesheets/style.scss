@@ -19,6 +19,16 @@ nav > ul > li {
 .off {
   color: gray;
 }
+
+// index.hbs
+.tagline {
+  text-align: center;
+}
+
+.food-categories {
+  margin: 0 auto;
+}
+
 .index-googlemap {
   width: 80vw;
   height: 60vh;
