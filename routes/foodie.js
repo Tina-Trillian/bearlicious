@@ -2,8 +2,9 @@ const express = require('express');
 const router  = express.Router();
 const User = require("../models/User");
 const Rest = require("../models/Restaurant")
-const Rec = require("../models/Recommend")
-const getRightPlace = require("../public/javascripts/places.js");
+const Places = require("../public/javascripts/places.js");
+const getThreeResults = Places.getThreeResults;
+const getRightPlace = Places.getRightPlace;
 
 
 //add ":id" later to the route, when we have models
@@ -14,10 +15,11 @@ router.get('/profile/:id', (req, res, next) => {
 });
 
 
-//check if user is signed in and the right one
+//check if user is signed in and the right one, otherwise redirect to
+//sign in page
 router.get('/:id',(req, res, next) => {
   if (!req.user || req.user.id !== req.params.id) {
-    res.redirect("/")
+    res.redirect("/auth/login")
   }
   else next();
 });
@@ -73,19 +75,40 @@ router.get("/:id/recommendations", (req, res, next) => {
 
 })
 
-router.get("/:id/recommendations/create", (req, res, next) => {
+router.get("/:id/recommendations/search", (req, res, next) => {
+  
+  res.render("foodie/search", {user: req.user})
 
-  getRightPlace("+493040044289").then(result => {
-    res.render("foodie/edit", {
-      user: req.user,
-      restaurant: result,
-    })
-  })
+})
+
+//Will ask the Api for the top 3 results and render the page with the
+//results
+router.post("/:id/recommendations/search", (req, res, next) => {
+  const {term} = req.body
+  
+  getThreeResults({term, location: "Berlin, germany"}).then(restaurants => {
+    console.log(restaurants);
+    res.render("foodie/search", {restaurants, user : req.user})})
+  .catch(err => console(err))
 })
 
 router.post("/:id/recommendations/create", (req, res, next) => {
-  let {name,phone,picPath,address,coordinates,comment} = req.body;
+    const {coordinates, picPath, address, name, phone} = req.body
+    const restaurant = {
+      coordinates,
+      picPath,
+      address,
+      name,
+      phone,
+    }
+    res.render("foodie/create", {
+      user: req.user,
+      restaurant,
+    })
+  })
 
+router.post("/:id/recommendations/new", (req, res, next) => {
+  let {name,phone,picPath,address,coordinates,comment} = req.body;
   const arrAddress = address.split(",")
   const arrCoordinates = coordinates.split(",")
   const numberArray = arrCoordinates.map(el => {
@@ -98,6 +121,11 @@ router.post("/:id/recommendations/create", (req, res, next) => {
   Rest.findOne({phone: phone}).then(rest => {
 
     console.log("Result",rest)
+    let restaurant;
+    //check if there already is a restaurant with that phone number 
+    //phone number acts as an id here - if there is, the recommendation will be
+    //added to the existing Restaurant if not it will create a new Restuarant
+
 
     if (rest === null) {
       const newRes = new Rest({
@@ -117,8 +145,8 @@ router.post("/:id/recommendations/create", (req, res, next) => {
       author_id: req.user._id,
         })
       newRes.save()
-      
-      res.redirect(`/restaurant/${newRes._id}`)
+      restaurant = newRes
+      // res.redirect(`/restaurant/${newRes._id}`)
     }
   else {
   
@@ -131,12 +159,17 @@ router.post("/:id/recommendations/create", (req, res, next) => {
 
       rest.save();
 
-    console.log("22222",rest.recommendation)
+      restaurant = rest
+    console.log("22222",rest)
 
-    res.redirect(`/restaurant/${rest._id}`)
+   
   }
+  return restaurant;
+  }).then(result => {
+    console.log(result)
+    res.redirect(`/restaurant/${result._id}`)
   })
- 
+
 
 })
 

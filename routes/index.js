@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Restaurant = require("../models/Restaurant");
-
+const getThreeResults = require("../public/javascripts/places")
 
 /* GET home page */
 router.get('/', (req, res, next) => {
@@ -14,6 +14,7 @@ router.get('/', (req, res, next) => {
     }); // send restaurants  
   })
 });
+
 
 router.get("/restaurant/:id", (req, res, next) => {
   

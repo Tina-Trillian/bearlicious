@@ -32,12 +32,16 @@ client.search(searchRequest).then(response => {
   }
 
   const shortArr = results.map(el => {
+    const {name,phone, image_url} = el;
+    const {latitude, longitude} = el.coordinates;
     let address = el.location.display_address;
         address.pop();
     const tempObj = {
-        name: el.name,
+        name,
+        phone,
         address,
-        phone: el.phone,
+        picPath: image_url,
+        coordinates: [latitude, longitude],
     }
       return tempObj
   })
@@ -47,9 +51,10 @@ client.search(searchRequest).then(response => {
 }
 
 
+
 //for tryout purposes we set a phone variable
 //it will be passed from a button click on the "right" restaurant
-let phone = "+493040044289"
+// let phone = "+493040044289"
 
 
 const getRightPlace = function (phone) {
@@ -75,12 +80,14 @@ client.phoneSearch({phone: phone})
 })
 }
 
-getRightPlace(phone).then(result => {
-    console.log(result)
-})
 
+module.exports =  {
+    getThreeResults,
+    getRightPlace
+}
 
-module.exports =  getRightPlace
+exports.getThreeResults = getThreeResults();
+exports.getRightPlace = getRightPlace();
 
 
 

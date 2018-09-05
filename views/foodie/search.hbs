@@ -1,0 +1,25 @@
+<div>
+  <h3>Hello {{user.username}}</h3>
+  <h4>Which restaurant do you want to recommend to other Berliners?</h4>
+  <div>(google map)</div>
+  <div>
+  <form action="/foodie/{{user._id}}/recommendations/search" method="POST">
+  <label for="term">Type in the name of the restaurant here!</label>
+  <input type="text" name="term">
+  <button type="submit">Search :)</button>
+  </form>
+
+  {{#each restaurants}}
+  <p>{{this.name}}</p>
+  <form action="/foodie/{{../ user._id}}/recommendations/create" method="POST">
+  <input type="text" name="coordinates" value="{{this.coordinates}}">
+  <input type="text" name="picPath" value="{{this.picPath}}">
+  <input type="text" name="address" value="{{this.address}}">
+  <input type="text" name="name" value="{{this.name}}">
+  <input type="text" name="phone" value="{{this.phone}}">
+  <button type="submit">This is the right one!</button>
+  </form>
+  <p>{{this.address}}</p>
+  {{/each}}
+  </div>
+</div>
