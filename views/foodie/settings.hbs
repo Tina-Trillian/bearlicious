@@ -1,43 +1,41 @@
-<h1>Settings</h1>
+<div class="back-white">
+  <div class="back-white-content">
+    <h1>Settings</h1>
 
-<p>{{user}}</p>
+    <p>{{user}}</p>
 
-<form action="/auth/{{user._id}}/update" method="POST" id="form-container">
-<label for="username">Username</label>
-  <input id="username" type="text" name="username" value="{{user.username}}">
+    <form action="/auth/{{user._id}}/update" method="POST" id="form-container">
+      <label for="username">Username</label>
+      <input id="username" type="text" name="username" value="{{user.username}}">
 
-  <br><br>
+      <br><br>
 
-  <label for="description">Description</label>
-  <input id="description" type="description" name="description" value="{{user.description}}">
-
-  <br><br>
-  
-
-  <ul>
-    {{#each expArr}}
-      {{#if this.value}} 
+      <label for="description">Description</label>
+      <input id="description" type="description" name="description" value="{{user.description}}">
+      <br><br>
+      <ul>
+        {{#each expArr}} {{#if this.value}}
         <li class=“{{this.key}}”><button type="button" class="btn toggle on">{{this.key}}</button>
-      {{else}}
-        <li class=“{{this.key}}”><button type="button" class="btn toggle off">{{this.key}}</button>
-      {{/if}}
-    {{/each}}
-    <input name="expertIn" id="expertIn" type="text" class="hidden">
-  </ul>
+          {{else}}
+          <li class=“{{this.key}}”><button type="button" class="btn toggle off">{{this.key}}</button>
+            {{/if}} {{/each}}
+            <input name="expertIn" id="expertIn" type="text" class="hidden">
+      </ul>
 
-  {{#if message }}
+      {{#if message }}
+      <br><br>
+      <div class="error-message">{{ message }}</div>
+      <br><br> {{/if}}
+
+      <button>Update account</button>
+
+      <img src="{{user.picPath}}" alt="" width="100px">
+    </form>
+    <form action="/auth/{{user._id}}/update/picture" method="POST" encType="multipart/form-data">
+      <label for="picture">Profile Picture</label>
+      <input type="file" name="picture" class="form-control" placeholder="No file selected">
+      <button>change Picture</button>
+    </form>
     <br><br>
-    <div class="error-message">{{ message }}</div>
-    <br><br>
-  {{/if}}
-
-  <button>Update account</button>
-
-  <img src="{{user.picPath}}" alt="" width="100px">
-  </form>
-  <form action="/auth/{{user._id}}/update/picture" method="POST" encType="multipart/form-data">
-  <label for="picture">Profile Picture</label>
-  <input type="file" name="picture" class="form-control" placeholder="No file selected">
-  <button>change Picture</button>
-  </form>
-  <br><br>
+  </div>
+</div>
