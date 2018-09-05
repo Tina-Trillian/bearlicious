@@ -116,6 +116,10 @@ router.post("/:id/recommendations/search", (req, res, next) => {
   .catch(err => console(err))
 })
 
+router.get("/:id/recommendations/create/:restid", (req,res,next) => {
+  res.send(req.params.restid)
+})
+
 router.post("/:id/recommendations/create", (req, res, next) => {
     const {coordinates, picPath, address, name, phone,id} = req.body
     const arrAddress = address.split(",")
@@ -156,9 +160,6 @@ router.post("/:id/recommendations/create", (req, res, next) => {
 
 
 router.post("/:id/recommendations/new", (req, res, next) => {
-
-
-
 
 
  User.findById(req.user.id).then(user => {
