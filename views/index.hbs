@@ -1,4 +1,4 @@
-<div class="container">
+<div>
   <div class="tagline">
     <h4>Find the best places to eat, drink in Berlin. Access over 1 million tips from local foodies.</h4>
   </div>
@@ -6,20 +6,22 @@
     {{#each restaurants}}
     <p id="res-name">{{this.name}}</p>
     <p id="res-location">{{this.location.coordinates}}</p>
+    <p id="res-id">{{this._id}}</p>
+
     {{/each}}
   </div>
   <div class="food-categories">
     <ul>
-      <li class="food1"><a class="btn btn-primary btn-sm" href="#" role="button">food1</a></li>
-      <li class="food2"><a class="btn btn-primary btn-sm" href="#" role="button">food2</a></li>
-      <li class="food3"><a class="btn btn-primary btn-sm" href="#" role="button">food3</a></li>
-      <li class="food4"><a class="btn btn-primary btn-sm" href="#" role="button">food4</a></li>
-      <li class="food5"><a class="btn btn-primary btn-sm" href="#" role="button">food5</a></li>
-      <li class="food6"><a class="btn btn-primary btn-sm" href="#" role="button">food6</a></li>
-      <li class="food7"><a class="btn btn-primary btn-sm" href="#" role="button">food7</a></li>
-      <li class="food8"><a class="btn btn-primary btn-sm" href="#" role="button">food8</a></li>
-      <li class="food9"><a class="btn btn-primary btn-sm" href="#" role="button">food9</a></li>
-      <li class="food10"><a class="btn btn-primary btn-sm" href="#" role="button">food10</a></li>
+      <li class="food1"><a class="btn btn-secondary btn-sm" href="#" role="button">food1</a></li>
+      <li class="food2"><a class="btn btn-secondary btn-sm" href="#" role="button">food2</a></li>
+      <li class="food3"><a class="btn btn-secondary btn-sm" href="#" role="button">food3</a></li>
+      <li class="food4"><a class="btn btn-secondary btn-sm" href="#" role="button">food4</a></li>
+      <li class="food5"><a class="btn btn-secondary btn-sm" href="#" role="button">food5</a></li>
+      <li class="food6"><a class="btn btn-secondary btn-sm" href="#" role="button">food6</a></li>
+      <li class="food7"><a class="btn btn-secondary btn-sm" href="#" role="button">food7</a></li>
+      <li class="food8"><a class="btn btn-secondary btn-sm" href="#" role="button">food8</a></li>
+      <li class="food9"><a class="btn btn-secondary btn-sm" href="#" role="button">food9</a></li>
+      <li class="food10"><a class="btn btn-secondary btn-sm" href="#" role="button">food10</a></li>
     </ul>
   </div>
   <div id="index-googlemap"></div>

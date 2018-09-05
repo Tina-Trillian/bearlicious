@@ -1,16 +1,20 @@
-<h1>My Recommendations</h1>
-<div class="bg-white">
-  <h4><a href="/foodie/{{user._id}}/recommendations/search">(+) Add a recommendation</a></h4>
-  (list of the restaurants the user recommended)
-  <div class="restaurant-card">
-    <h3>(Restaurant Name)</h3>
-    <div class="restaurant-image">
-      (#restaurant-image)
+<div class="back-white">
+  <div class="back-white-content">
+    <h3>My Recommendations</h3>
+    <div class="bg-white">
+      <h4><a href="/foodie/{{user._id}}/recommendations/search">(+) Add a recommendation</a></h4>
+      (list of the restaurants the user recommended)
+      <div class="restaurant-card">
+        <h3>(Restaurant Name)</h3>
+        <div class="restaurant-image">
+          (#restaurant-image)
+        </div>
+        <div class="restaurant-info">
+          (#restaurant-info)
+        </div>
+        <a class="btn btn-primary" href="/foodie/:id/recommendation/edit" role="button">Edit</a>
+        <a class="btn btn-primary" href="#" role="button">Delete</a>
+      </div>
     </div>
-    <div class="restaurant-info">
-      (#restaurant-info)
-    </div>
-    <a class="btn btn-primary" href="/foodie/:id/recommendation/edit" role="button">Edit</a>
-    <a class="btn btn-primary" href="#" role="button">Delete</a>
   </div>
 </div>

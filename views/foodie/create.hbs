@@ -1,15 +1,16 @@
-
-<div class="bg-white">
-  <h3>{{restaurant.name}}</h3>
-  <p>{{restaurant.address}}</p>
-  <form action="/foodie/{{user._id}}/recommendations/new" method="POST">
-    <input type="text" name="name" value="{{restaurant.name}}">
-    <input type="text" name="phone"value="{{restaurant.phone}}">
-    <input type="text" name="picPath"value="{{restaurant.picPath}}">
-    <input type="text" name="address"value="{{restaurant.address}}">
-    <input type="text" name="coordinates"value="{{restaurant.coordinates}}">
-    <input type="text" name="yelpId"value="{{restaurant.yelpId}}">
-    <textarea rows="4" cols="50" name="comment"></textarea>
-    <button type='submit'>Save</button>
-  </form>
+<div class="back-white">
+  <div class="back-white-content">
+    <h3>{{restaurant.name}}</h3>
+    <p>{{restaurant.address}}</p>
+    <form action="/foodie/{{user._id}}/recommendations/new" method="POST">
+      <input type="text" name="name" value="{{restaurant.name}}">
+      <input type="text" name="phone" value="{{restaurant.phone}}">
+      <input type="text" name="picPath" value="{{restaurant.picPath}}">
+      <input type="text" name="address" value="{{restaurant.address}}">
+      <input type="text" name="coordinates" value="{{restaurant.coordinates}}">
+      <input type="text" name="yelpId" value="{{restaurant.yelpId}}">
+      <textarea rows="4" cols="50" name="comment"></textarea>
+      <button type='submit'>Save</button>
+    </form>
+  </div>
 </div>

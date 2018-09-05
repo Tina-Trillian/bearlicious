@@ -10,7 +10,7 @@ function startMap() {
   const map = new google.maps.Map(
     document.getElementById('index-googlemap'),
     {
-      zoom: 15,
+      zoom: 12,
       center: berlin
     }
   );
@@ -34,8 +34,12 @@ function startMap() {
   // creating array of each restaurant data with the name and the location
   const array = [];
   const locArray = [];
+  const resIdArr = [];
   const resName = document.querySelectorAll("#res-name")
   const location = document.querySelectorAll("#res-location")
+  const resId = document.querySelectorAll("#res-id")
+  // document.getElementById("index-res")
+
 
   resName.forEach(function (item) {
     array.push([{ name: item.innerHTML }])
@@ -44,6 +48,12 @@ function startMap() {
   location.forEach(function (item) {
     locArray.push(item.innerHTML.split(","))
   })
+
+  resId.forEach(function (item) {
+    resIdArr.push(item.innerHTML)
+  })
+  console.log("resIdArr: ", resIdArr);
+
 
   for (let i = 0; i < locArray.length; i++) {
     array[i].push({
@@ -63,17 +73,18 @@ function startMap() {
         lng: array[i][1].lng,
       },
       map: map,
-      title: array[i][0].name
+      title: array[i][0].name,
+      id: resIdArr[i]
     })
   }
 
-  // console.log("markArr: ", markArr);
+  console.log("markArr: ", markArr);
 
   markArr.forEach(function (item) {
     const marker = new google.maps.Marker(item);
     marker.setMap(map);
     const infoWindow = new google.maps.InfoWindow({
-      content: '<a href="/restaurant/">' + item.title +
+      content: '<a href="/restaurant/' + item.id + '">' + item.title +
         '</a>'
     });
     marker.addListener('click', function () {
@@ -84,6 +95,22 @@ function startMap() {
 }
 
 startMap();
+
+
+// function initMap() {
+//   // The location of Uluru
+//   var uluru = { lat: -25.344, lng: 131.036 };
+//   // The map, centered at Uluru
+//   var restMap = new google.maps.Map(
+//     document.getElementById('restaurant-map'), { zoom: 4, center: uluru });
+//   // The marker, positioned at Uluru
+//   var marker = new google.maps.Marker({ position: uluru, map: restMap });
+//   marker.setMap(restMap);
+// }
+
+// initMap();
+
+
 
 
 //// code for sample markers

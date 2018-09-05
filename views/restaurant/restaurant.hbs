@@ -1,41 +1,32 @@
 <div class="back-white">
   <div class="back-white-content">
-    <h3>{{restaurant.name}}</h3>
-    <div id="restaurant-map">
-      <p>Google Map</p>
-    </div>
     <div class="restaurant-image">
       <img src="{{restaurant.picPath}}" alt="" width="400">
     </div>
+    <h3>{{restaurant.name}}</h3>
+    {{!--
+    <p>{{restaurant}}</p> --}}
+    <p>{{restaurant.address}}</p>
+    <p>{{restaurant.phone}}</p>
+    <p class="hidden" id="each-res-location">{{ restaurant.location.coordinates}}</p>
+    <div id="restaurant-map"></div>
     <div class="restaurant-info">
-      <p>The description goes here</p>
+      <p>(The description goes here)</p>
       {{restaurant.description}}
     </div>
     <h4>Recommendations</h4>
     <div class="recommend-card">
-      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorum necessitatibus nobis mollitia esse alias. Quae
-        nemo quo assumenda, consectetur quaerat, repellendus libero, asperiores tempora enim eius voluptatum explicabo expedita
-        similique.
-      </p>
-      <p>by Yuki</p>
-      <p>created 01.09.2018</p>
-
-    </div>
-    <div class="recommend-card">
-      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorum necessitatibus nobis mollitia esse alias. Quae
-        nemo quo assumenda, consectetur quaerat, repellendus libero, asperiores tempora enim eius voluptatum explicabo expedita
-        similique.
-      </p>
-      <p>by Yuki</p>
-      <p>created 01.09.2018</p>
-
-    </div>
-    <div class="recommend-card">
       {{#each restaurant.recommendation}}
       <p>{{this.comment}}</p>
       <p><i>by {{this.author}}</i></p>
-      <p>created {{this.updated_at}}</p>
+      <p><span id="created-on">created</span> <span class="updated_at">{{this.updated_at}}</span></p>
       {{/each}}
     </div>
   </div>
 </div>
+
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7U1ZJ_UFGajH9QOgchtqZ8PiRO3FzJWM"></script>
+
+<script src="/javascripts/rest-map.js"></script>

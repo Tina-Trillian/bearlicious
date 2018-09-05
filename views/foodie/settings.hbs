@@ -1,8 +1,8 @@
 <div class="back-white">
   <div class="back-white-content">
     <h1>Settings</h1>
-
-    <p>{{user}}</p>
+    {{!--
+    <p>{{user}}</p> --}}
 
     <form action="/auth/{{user._id}}/update" method="POST" id="form-container">
       <label for="username">Username</label>
@@ -13,7 +13,8 @@
       <label for="description">Description</label>
       <input id="description" type="description" name="description" value="{{user.description}}">
       <br><br>
-      <ul>
+      <h5>I'm expert for</h5>
+      <ul id="setting-expert">
         {{#each expArr}} {{#if this.value}}
         <li class=“{{this.key}}”><button type="button" class="btn toggle on">{{this.key}}</button>
           {{else}}
