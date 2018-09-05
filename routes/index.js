@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Restaurant = require("../models/Restaurant");
-const getThreeResults = require("../public/javascripts/places")
+const recommendation = require("../models/Recommend");
 
 /* GET home page */
 router.get('/', (req, res, next) => {
@@ -18,9 +18,13 @@ router.get('/', (req, res, next) => {
 
 router.get("/restaurant/:id", (req, res, next) => {
   
-  Restaurant.findById(req.params.id).then(restaurant => {
+  Restaurant.findById(req.params.id)
+  .populate("recommendation")
+  .exec()
+  .then(restaurant => {
     res.render("restaurant/restaurant", {
-        restaurant
+        restaurant,
+        user: req.user
     })
   })
 })
