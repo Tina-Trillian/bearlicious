@@ -1,5 +1,5 @@
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 const User = require("../models/User");
 const Rest = require("../models/Restaurant")
 const Rec = require("../models/Recommend")
@@ -9,13 +9,13 @@ const getRightPlace = require("../public/javascripts/places.js");
 //add ":id" later to the route, when we have models
 router.get('/profile/:id', (req, res, next) => {
   User.findById(req.params.id).then(user => {
-    res.render('foodie/profile', {user});
-  }) 
+    res.render('foodie/profile', { profileUser: user });
+  })
 });
 
 
 //check if user is signed in and the right one
-router.get('/:id',(req, res, next) => {
+router.get('/:id', (req, res, next) => {
   if (!req.user || req.user.id !== req.params.id) {
     res.redirect("/")
   }
@@ -25,7 +25,7 @@ router.get('/:id',(req, res, next) => {
 //we don't need to search the Database for the right User here,
 //because of the middleWare protection
 router.get("/:id/settings", (req, res, next) => {
-  
+
   const expArr = []
   const foodArr = User.schema.tree.expertIn.enum
   foodArr.map(el => {
@@ -57,7 +57,7 @@ router.get("/:id/bookmarks", (req, res, next) => {
 
 //when the user wants to access this route and does NOT have expertIn or
 //description values, he gets redirected to the setting page
-router.get("/:id/recommendations", (req,res, next) => {
+router.get("/:id/recommendations", (req, res, next) => {
   if (req.user.expertIn.length === 0 || !req.user.description) {
     res.redirect(`/foodie/${req.user._id}/settings`)
   }
@@ -84,7 +84,7 @@ router.get("/:id/recommendations/create", (req, res, next) => {
 })
 
 router.post("/:id/recommendations/create", (req, res, next) => {
-  let {name,phone,picPath,address,coordinates,comment} = req.body;
+  let { name, phone, picPath, address, coordinates, comment } = req.body;
 
   const arrAddress = address.split(",")
   const arrCoordinates = coordinates.split(",")
@@ -92,36 +92,36 @@ router.post("/:id/recommendations/create", (req, res, next) => {
     return parseFloat(el);
   })
 
-  
+
   console.log("Phone", phone)
 
-  Rest.findOne({phone: phone}).then(rest => {
+  Rest.findOne({ phone: phone }).then(rest => {
 
-    console.log("Result",rest)
+    console.log("Result", rest)
 
     if (rest === null) {
       const newRes = new Rest({
-      name,
-      phone,
-      picPath,
-      address : arrAddress,
-      location: {
-      type: "Point",
-      coordinates: numberArray,
+        name,
+        phone,
+        picPath,
+        address: arrAddress,
+        location: {
+          type: "Point",
+          coordinates: numberArray,
         }
-       })
+      })
       newRes.recommendation.push({
-      comment: comment,
-      author: req.user.username,
-      restName: newRes.name,
-      author_id: req.user._id,
-        })
+        comment: comment,
+        author: req.user.username,
+        restName: newRes.name,
+        author_id: req.user._id,
+      })
       newRes.save()
-      
+
       res.redirect(`/restaurant/${newRes._id}`)
     }
-  else {
-  
+    else {
+
       rest.recommendation = rest.recommendation.concat([{
         comment: comment,
         author: req.user.username,
@@ -131,12 +131,12 @@ router.post("/:id/recommendations/create", (req, res, next) => {
 
       rest.save();
 
-    console.log("22222",rest.recommendation)
+      console.log("22222", rest.recommendation)
 
-    res.redirect(`/restaurant/${rest._id}`)
-  }
+      res.redirect(`/restaurant/${rest._id}`)
+    }
   })
- 
+
 
 })
 
