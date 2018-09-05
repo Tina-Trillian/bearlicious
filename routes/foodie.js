@@ -179,7 +179,6 @@ router.post("/:id/recommendations/create", (req, res, next) => {
 
       rest.save();
 
-<<<<<<< HEAD
       restaurant = rest
     console.log("22222",rest)
 
@@ -189,12 +188,6 @@ router.post("/:id/recommendations/create", (req, res, next) => {
   }).then(result => {
     console.log(result)
     res.redirect(`/restaurant/${result._id}`)
-=======
-      console.log("22222", rest.recommendation)
-
-      res.redirect(`/restaurant/${rest._id}`)
-    }
->>>>>>> 9f9451f00b2c0439c168933b5bc40150aa4362b7
   })
 
 
