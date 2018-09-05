@@ -5,11 +5,12 @@ body {
 a {
   color: #00B7FF; }
 nav {
-  background-color: #eee;
+  background-color: #000;
 }
 nav > ul > li {
   display: inline;
 }
+
 .food-categories > ul > li {
   display: inline;
 }
@@ -19,27 +20,110 @@ nav > ul > li {
 .off {
   color: gray;
 }
-
-// index.hbs
-.tagline {
-  text-align: center;
+// background image
+.bg {
+  background-image: url(/images/bg.jpg);
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 100%;
+  height: 100%;
+  // filter: grayscale(20%);
 }
 
+// white-transparent background
+.back-white {
+  background-color: rgba(255, 255, 255, 0.8);
+  width: 80vw;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+// tagline for index page
+.tagline {
+  text-align: center;
+  color: #fff;
+  width: 80vw;
+  margin: 0 auto;
+  padding-top: 20px;
+
+}
 .food-categories {
   margin: 0 auto;
 }
 
 #index-googlemap {
-  width: 80vw;
-  height: 60vh;
+  width: 90vw;
+  height: 70vh;
   background-color: #eee;
-  margin: 0 auto;
+  margin: 0px auto;
+  z-index: 100;
 }
 
 .hidden {
   display: none;
 }
 
+// profile page
+
+#profile-name{
+  text-align: center;
+}
+
+#profile-userimage {
+  width: 250px;
+  height: 250px;
+  background-color: #333;
+  margin: 0 auto;
+}
+
+#profile-description {
+  width: 80%;
+  margin: 15px auto;
+  font-size: 1.05rem;
+}
+
+#profile-foodie, #profile-myrecommend  {
+  width: 80vw;
+  margin: 20px auto;
+  text-align: center;
+  padding: 20px 0;
+  // temporary setting
+  background-color: rgba(255, 255, 255, 0.8);
+
+}
+
+// restaurant page
+
+#rest-thumbnail  {
+  width: 70px;
+  height: 70px;
+  background-color: #333;
+}
+
+.recommend-card {
+  border: 1px solid #333;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+}
+
+.google-map-sm {
+  width: 250px;
+  height: 250px;
+  background-color: #333;
+  margin: 0 auto;
+}
+
+.back-white-content {
+  width: 80%;
+  margin: 0 auto;
+  padding: 10px 0;
+}
+
 footer {
   text-align: center;
+  background-color: #111;
+  color: #fff;
+  font-size: 0.8rem;
+  padding: 8px 0;
 }

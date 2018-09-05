@@ -30,21 +30,6 @@ function startMap() {
     console.log('Browser does not support geolocation')
   }
 
-  // show locations of the restaurants of the category the user selected.
-
-  const sampleRes = {
-    name: "Sushi Restaurants",
-    location: {
-      coordinates: [52.508402, 13.374900],
-    }
-  };
-
-  const sampleRes2 = {
-    name: "Pizza Restaurants",
-    location: {
-      coordinates: [52.509034, 13.375079],
-    }
-  };
 
   // creating array of each restaurant data with the name and the location
   const array = [];
@@ -163,3 +148,19 @@ startMap();
   //   infowindow2.open(map, sampleResMarker2);
   // });
 
+
+  // show locations of the restaurants of the category the user selected.
+
+  // const sampleRes = {
+  //   name: "Sushi Restaurants",
+  //   location: {
+  //     coordinates: [52.508402, 13.374900],
+  //   }
+  // };
+
+  // const sampleRes2 = {
+  //   name: "Pizza Restaurants",
+  //   location: {
+  //     coordinates: [52.509034, 13.375079],
+  //   }
+  // };

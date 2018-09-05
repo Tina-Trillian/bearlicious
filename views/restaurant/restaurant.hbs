@@ -1,21 +1,42 @@
-<div class="bg-white">
-  <h3>{{restaurant.name}}</h3>
-  <div id="restaurant-map">
-    <p>Google Map</p>
+<div class="back-white">
+  <div class="back-white-content">
+    <div id="rest-thumbnail">restaurant image</div>
+    <h3>{{restaurant.name}}</h3>
+    <div id="restaurant-map">
+      <p>Google Map</p>
+    </div>
+    <div class="restaurant-image">
+      <img src="{{restaurant.picPath}}" alt="" width="400">
+    </div>
+    <div class="restaurant-info">
+      <p>The description goes here</p>
+      {{restaurant.description}}
+    </div>
+    <h4>Recommendations</h4>
+    <div class="recommend-card">
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorum necessitatibus nobis mollitia esse alias. Quae
+        nemo quo assumenda, consectetur quaerat, repellendus libero, asperiores tempora enim eius voluptatum explicabo expedita
+        similique.
+      </p>
+      <p>by Yuki</p>
+      <p>created 01.09.2018</p>
+
+    </div>
+    <div class="recommend-card">
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorum necessitatibus nobis mollitia esse alias. Quae
+        nemo quo assumenda, consectetur quaerat, repellendus libero, asperiores tempora enim eius voluptatum explicabo expedita
+        similique.
+      </p>
+      <p>by Yuki</p>
+      <p>created 01.09.2018</p>
+
+    </div>
+    <div class="recommend-card">
+      {{#each restaurant.recommendation}}
+      <p>{{this.comment}}</p>
+      <p><i>by {{this.author}}</i></p>
+      <p>created {{this.updated_at}}</p>
+      {{/each}}
+    </div>
   </div>
-  <div class="restaurant-image">
-    <img src="{{restaurant.picPath}}" alt="" width="400">
-  </div>
-  <div class="restaurant-info">
-    <p>The description goes here</p>
-    {{restaurant.description}}
-  </div>
-</div>
-<h4>Recommendations</h4>
-<div class="bg-white">
- {{#each restaurant.recommendation}}
- <p>{{this.comment}}</p>
- <p><i>by {{this.author}}</i></p>
- <p>created {{this.updated_at}}</p>
- {{/each}}
 </div>
