@@ -92,13 +92,14 @@ router.post("/:id/recommendations/search", (req, res, next) => {
 })
 
 router.post("/:id/recommendations/create", (req, res, next) => {
-    const {coordinates, picPath, address, name, phone} = req.body
+    const {coordinates, picPath, address, name, phone,id} = req.body
     const restaurant = {
       coordinates,
       picPath,
       address,
       name,
       phone,
+      yelpId : id,
     }
     res.render("foodie/create", {
       user: req.user,
@@ -107,7 +108,7 @@ router.post("/:id/recommendations/create", (req, res, next) => {
   })
 
 router.post("/:id/recommendations/new", (req, res, next) => {
-  let {name,phone,picPath,address,coordinates,comment} = req.body;
+  let {name,phone,picPath,address,coordinates,comment,yelpId} = req.body;
   const arrAddress = address.split(",")
   const arrCoordinates = coordinates.split(",")
   const numberArray = arrCoordinates.map(el => {
@@ -117,18 +118,19 @@ router.post("/:id/recommendations/new", (req, res, next) => {
 
   console.log("Phone", phone)
 
-  Rest.findOne({ phone: phone }).then(rest => {
+  Rest.findOne({yelpId : yelpId}).then(rest => {
 
     console.log("Result",rest)
     let restaurant;
-    //check if there already is a restaurant with that phone number 
-    //phone number acts as an id here - if there is, the recommendation will be
+    //check if there already is a restaurant with that id
+    //if there is, the recommendation will be
     //added to the existing Restaurant if not it will create a new Restuarant
 
 
     if (rest === null) {
       const newRes = new Rest({
         name,
+        yelpId,
         phone,
         picPath,
         address: arrAddress,

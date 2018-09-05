@@ -32,11 +32,12 @@ client.search(searchRequest).then(response => {
   }
 
   const shortArr = results.map(el => {
-    const {name,phone, image_url} = el;
+    const {name,phone, image_url, id} = el;
     const {latitude, longitude} = el.coordinates;
     let address = el.location.display_address;
         address.pop();
     const tempObj = {
+        id,
         name,
         phone,
         address,
