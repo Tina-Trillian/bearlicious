@@ -14,20 +14,14 @@ router.get('/profile/:id', (req, res, next) => {
   })
 });
 
-
-<<<<<<< HEAD
-//check if user is signed in and the right one, otherwise redirect to
+//check if the user is signed in and the right one, otherwise redirect to
 //sign in page
 router.get('/:id',(req, res, next) => {
-=======
-//check if user is signed in and the right one
-router.get('/:id', (req, res, next) => {
->>>>>>> 9f9451f00b2c0439c168933b5bc40150aa4362b7
   if (!req.user || req.user.id !== req.params.id) {
-    res.redirect("/auth/login")
+    res.redirect("auth/login")
   }
   else next();
-});
+})
 
 //we don't need to search the Database for the right User here,
 //because of the middleWare protection
@@ -112,14 +106,8 @@ router.post("/:id/recommendations/create", (req, res, next) => {
     })
   })
 
-<<<<<<< HEAD
 router.post("/:id/recommendations/new", (req, res, next) => {
   let {name,phone,picPath,address,coordinates,comment} = req.body;
-=======
-router.post("/:id/recommendations/create", (req, res, next) => {
-  let { name, phone, picPath, address, coordinates, comment } = req.body;
-
->>>>>>> 9f9451f00b2c0439c168933b5bc40150aa4362b7
   const arrAddress = address.split(",")
   const arrCoordinates = coordinates.split(",")
   const numberArray = arrCoordinates.map(el => {
@@ -131,16 +119,12 @@ router.post("/:id/recommendations/create", (req, res, next) => {
 
   Rest.findOne({ phone: phone }).then(rest => {
 
-<<<<<<< HEAD
     console.log("Result",rest)
     let restaurant;
     //check if there already is a restaurant with that phone number 
     //phone number acts as an id here - if there is, the recommendation will be
     //added to the existing Restaurant if not it will create a new Restuarant
 
-=======
-    console.log("Result", rest)
->>>>>>> 9f9451f00b2c0439c168933b5bc40150aa4362b7
 
     if (rest === null) {
       const newRes = new Rest({
@@ -160,13 +144,8 @@ router.post("/:id/recommendations/create", (req, res, next) => {
         author_id: req.user._id,
       })
       newRes.save()
-<<<<<<< HEAD
       restaurant = newRes
       // res.redirect(`/restaurant/${newRes._id}`)
-=======
-
-      res.redirect(`/restaurant/${newRes._id}`)
->>>>>>> 9f9451f00b2c0439c168933b5bc40150aa4362b7
     }
     else {
 
