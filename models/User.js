@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const Recommend = require("../models/Recommend");
 
 //User can sign-in with facebook and google as well
 //that is why the password etc. is not required
@@ -22,6 +23,9 @@ const userSchema = new Schema({
   facebookId: String,
   googleId: String,
   bookmarks: [Schema.Types.ObjectId],
+  recommendations: [{
+    type: Schema.Types.ObjectId,
+    ref: "Recommend"}],
 }, {
     timestamps: {
       createdAt: 'created_at',

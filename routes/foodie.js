@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require("../models/User");
 const Rest = require("../models/Restaurant")
+const Recom = require("../models/Recommend")
 const Places = require("../public/javascripts/places.js");
 const getThreeResults = Places.getThreeResults;
 const getRightPlace = Places.getRightPlace;
@@ -68,9 +69,33 @@ router.get("/:id/recommendations", (req, res, next) => {
 //we don't need to search the Database for the right User here,
 //because of the middleWare protection
 router.get("/:id/recommendations", (req, res, next) => {
-  res.render("foodie/recommendations", {
-    user: req.user,
+
+  //populates works just with a query! It is also important to name the Schema
+  //like you do in the file it is defined!
+  //with the code below, it is possible to populate fields INSIDE populated fields!
+
+  User.findById(req.params.id)
+    .populate({
+    path: 'recommendations',
+    populate: { path: 'restId' }
+  }).then(result => {
+    let restaurants = []
+    result.recommendations.forEach(el => {
+      restaurants.push(el.restId)
+    })
+    res.render("foodie/recommendations", {
+      user: req.user,
+      restaurants
+    })
   })
+
+ 
+
+
+
+  // res.render("foodie/recommendations", {
+  //   user: req.user,
+  // })
 
 })
 
@@ -93,86 +118,132 @@ router.post("/:id/recommendations/search", (req, res, next) => {
 
 router.post("/:id/recommendations/create", (req, res, next) => {
     const {coordinates, picPath, address, name, phone,id} = req.body
-    const restaurant = {
-      coordinates,
-      picPath,
-      address,
-      name,
-      phone,
-      yelpId : id,
-    }
-    res.render("foodie/create", {
-      user: req.user,
-      restaurant,
-    })
-  })
-
-router.post("/:id/recommendations/new", (req, res, next) => {
-  let {name,phone,picPath,address,coordinates,comment,yelpId} = req.body;
-  const arrAddress = address.split(",")
-  const arrCoordinates = coordinates.split(",")
-  const numberArray = arrCoordinates.map(el => {
+    const arrAddress = address.split(",")
+    const arrCoordinates = coordinates.split(",")
+    const numberArray = arrCoordinates.map(el => {
     return parseFloat(el);
   })
+  
+    Rest.findOne({yelpId : id}).then(restaurant => {
+      
+      
+      if(!restaurant) {
+        new Rest({
+          location: {
+               type: "Point",
+               coordinates: numberArray,
+              },
+          picPath,
+          address,
+          name,
+          phone,
+          yelpId : id,
+        }).save().then(rest => {
+          res.render("foodie/create", {
+            user: req.user,
+            restaurant : rest,
+          })
+        })
+      }
+      else {
+        res.render("foodie/create", {
+          user: req.user,
+          restaurant,
+        })
+      }
+  })
+})
 
 
-  console.log("Phone", phone)
-
-  Rest.findOne({yelpId : yelpId}).then(rest => {
-
-    console.log("Result",rest)
-    let restaurant;
-    //check if there already is a restaurant with that id
-    //if there is, the recommendation will be
-    //added to the existing Restaurant if not it will create a new Restuarant
+router.post("/:id/recommendations/new", (req, res, next) => {
 
 
-    if (rest === null) {
-      const newRes = new Rest({
-        name,
-        yelpId,
-        phone,
-        picPath,
-        address: arrAddress,
-        location: {
-          type: "Point",
-          coordinates: numberArray,
-        }
-      })
-      newRes.recommendation.push({
-        comment: comment,
-        author: req.user.username,
-        restName: newRes.name,
-        author_id: req.user._id,
-      })
-      newRes.save()
-      restaurant = newRes
-      // res.redirect(`/restaurant/${newRes._id}`)
-    }
-    else {
 
-      rest.recommendation = rest.recommendation.concat([{
-        comment: comment,
-        author: req.user.username,
-        restName: rest.name,
-        author_id: req.user._id,
-      }])
 
-      rest.save();
 
-      restaurant = rest
-    console.log("22222",rest)
+ User.findById(req.user.id).then(user => {
+
+    Rest.findById(req.body._id)
+    .then(restaurant => {
+
+        let newRecom = new Recom({
+          comment: req.body.comment,
+          author: req.user.username,
+          restName: restaurant.name,
+          authorId: req.user._id,
+          restId: restaurant._id,
+        })
+        .save()
+        .then(result => {
+          user.recommendations = user.recommendations.concat([result._id])
+          user.save()
+          restaurant.recommendation = restaurant.recommendation.concat([result._id])
+          restaurant.save()
+          console.log("REST",restaurant.recommendation)
+          console.log("USER",user.recommendations)
+        })
+        .then(result => {
+          res.redirect(`/restaurant/${restaurant._id}`)
+        })
+     })  
+  })
+})
+
+  //   if (rest === null) {
+  //     const newRes = new Rest({
+  //       name,
+  //       yelpId,
+  //       phone,
+  //       picPath,
+  //       address: arrAddress,
+  //       location: {
+  //         type: "Point",
+  //         coordinates: numberArray,
+  //       }
+  //     })
+
+  //     const newRec = new Recom({
+  //       comment: comment,
+  //       author: req.user.username,
+  //       restName: newRes.name,
+  //       author_id: req.user._id,
+  //     }).save().then(result => {
+  //       User.findById(req.user.id).then(user => {
+  //         user.recommendation.push(result._id)
+  //       }).save()
+  //       newRes.recommendation.push(result._id)
+  //     })
+
+  //     newRes.save()
+
+  //     res.send(newRes)
+  //     restaurant = newRes
+  //     // res.redirect(`/restaurant/${newRes._id}`)
+  //   }
+  //   else {
+
+  //     rest.recommendation = rest.recommendation.concat([{
+  //       comment: comment,
+  //       author: req.user.username,
+  //       restName: rest.name,
+  //       author_id: req.user._id,
+  //     }])
+
+  //     rest.save();
+
+  //     restaurant = rest
+  //   console.log("22222",rest)
 
    
-  }
-  return restaurant;
-  }).then(result => {
-    console.log(result)
-    res.redirect(`/restaurant/${result._id}`)
-  })
+  // }
+  // return restaurant;
+  // }).then(result => {
+  //   console.log(result)
+  //   res.redirect(`/restaurant/${result._id}`)
+  // })
 
 
-})
+// })
 
 
 
