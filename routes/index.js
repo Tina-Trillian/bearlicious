@@ -26,7 +26,7 @@ router.get("/restaurant/:id", (req, res, next) => {
 
     let bookmark = false
 
-    if (req.user.bookmarks.indexOf(req.params.id) === 0) {
+    if (req.user.bookmarks.indexOf(req.params.id) !== -1) {
       bookmark = true
     }
 
