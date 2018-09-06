@@ -18,12 +18,9 @@ router.get('/profile/:id', (req, res, next) => {
   .then(user => {
     let sameUser = false
 
-    console.log("REQ", typeof req.user._id)
-    console.log("USER",typeof user._id)
     if (req.user._id.toString() == user._id.toString()) {
       sameUser = true
     }
-    console.log("DEBUG",sameUser)
     
     res.render('foodie/profile', { 
       user: req.user,

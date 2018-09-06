@@ -1,7 +1,7 @@
 // starting google map on index page
 // with user's position // 
 
-function startMap() {
+function startMap(filter) {
   const berlin = {
     lat: 52.519459,
     lng: 13.401106
@@ -35,10 +35,13 @@ function startMap() {
   const array = [];
   const locArray = [];
   const resIdArr = [];
+  const resCatArr = [];
   const resName = document.querySelectorAll("#res-name")
   const location = document.querySelectorAll("#res-location")
   const resId = document.querySelectorAll("#res-id")
+  const resCat = document.querySelectorAll("#res-cat")
   // document.getElementById("index-res")
+
 
 
   resName.forEach(function (item) {
@@ -52,7 +55,10 @@ function startMap() {
   resId.forEach(function (item) {
     resIdArr.push(item.innerHTML)
   })
-  console.log("resIdArr: ", resIdArr);
+
+  resCat.forEach(function (item) {
+    resCatArr.push(item.innerHTML)
+  })
 
 
   for (let i = 0; i < locArray.length; i++) {
@@ -62,10 +68,11 @@ function startMap() {
     })
   }
 
-  // console.log("array: ", array)
+  
 
+  
   /// creating array of objects for google.map.Marker
-  const markArr = [];
+  let markArr = [];
   for (let i = 0; i < array.length; i++) {
     markArr.push({
       position: {
@@ -74,11 +81,17 @@ function startMap() {
       },
       map: map,
       title: array[i][0].name,
+      cat: resCatArr[i],
       id: resIdArr[i]
     })
   }
 
-  console.log("markArr: ", markArr);
+
+  if (filter) {
+    markArr = markArr.filter(item => 
+      item.cat.includes(filter)
+    )
+  }
 
   markArr.forEach(function (item) {
     const marker = new google.maps.Marker(item);
@@ -91,10 +104,12 @@ function startMap() {
       infoWindow.open(map, marker)
     })
   })
+  
+
 
 }
 
-startMap();
+// startMap();
 
 
 // function initMap() {

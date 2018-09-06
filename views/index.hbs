@@ -7,22 +7,16 @@
     <p id="res-name">{{this.name}}</p>
     <p id="res-location">{{this.location.coordinates}}</p>
     <p id="res-id">{{this._id}}</p>
+    <p id="res-cat">{{this.category}}</p>
 
     {{/each}}
   </div>
   <div class="food-categories">
-    <ul>
-      <li class="pizza"><a class="btn btn-secondary btn-sm" href="#" role="button">Pizza</a></li>
-      <li class="burger"><a class="btn btn-secondary btn-sm" href="#" role="button">Burger</a></li>
-      <li class="vegan"><a class="btn btn-secondary btn-sm" href="#" role="button">Vegan</a></li>
-      <li class="sushi"><a class="btn btn-secondary btn-sm" href="#" role="button">Sushi</a></li>
-      <li class="german"><a class="btn btn-secondary btn-sm" href="#" role="button">German</a></li>
-      <li class="indian"><a class="btn btn-secondary btn-sm" href="#" role="button">Indian</a></li>
-      <li class="thai"><a class="btn btn-secondary btn-sm" href="#" role="button">Thai</a></li>
-      <li class="vietnamese"><a class="btn btn-secondary btn-sm" href="#" role="button">Vietnamese</a></li>
-      <li class="craft-beer"><a class="btn btn-secondary btn-sm" href="#" role="button">Craft beer</a></li>
-      <li class="other"><a class="btn btn-secondary btn-sm" href="#" role="button">Others</a></li>
-    </ul>
+      <ul id="setting-expert">
+        {{#each expArr}}
+          <li class=“{{this.key}}”><button type="button" class="btn toggle-index off">{{this.key}}</button>
+        {{/each}}
+        </ul>
   </div>
   <div id="index-googlemap"></div>
 </div>

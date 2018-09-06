@@ -1,31 +1,31 @@
-<div class="back-white">
-  <div class="back-white-content">
-    <h1>Settings</h1>
-    {{!--
-    <p>{{user}}</p> --}}
-    <form class="mt-4" action="/auth/{{user._id}}/update/picture" method="POST" encType="multipart/form-data">
-      <div class="profile-input">
-        <label for="file" class="setting-label">Profile Picture:</label>
-        <input type="file" name="picture" class="inputfile form-control" placeholder="placeholder">
-      </div>
 
-      <button>Save the image</button>
+<div class="container-heading">
+<h1 class="headline-white">Settings</h1>
+</div>
+<div class="back-white setting">
+  <div class="back-white-content setting">
+    <h4 class="mt-4">To recommend a restaurant you need to tell us more about you! :)</h4>
+    <form class="mt-4 form-picture" action="/auth/{{user._id}}/update/picture" method="POST" encType="multipart/form-data">
+      <div class="profile-input">
+        <h4>Change your Profile Picture</h4>
+        <input type="file" name="picture" class="inputfile form-control mb-3 col-8" placeholder="placeholder">
+      <div class="mb-3 setting-prifilepic mx-auto"><img src="{{user.picPath}}" alt=""></div>
+      <button class="btn col-4">Save the image</button>
+      </div>
     </form>
     <form class="mt-2" action="/auth/{{user._id}}/update" method="POST" id="form-container">
-      <div class="mb-3 setting-prifilepic"><img src="{{user.picPath}}" alt=""></div>
+      
 
-      <div class="form-group row">
+      <div class="form-group row d-flex justify-content-center mt-5">
         <label for="username" class="setting-label-username">Username: </label>
-        <div class="col-sm-4">
-          <input class="form-control" id="username" type="text" name="username" value="{{user.username}}">
-        </div>
+          <input class="form-control col-5" id="username" type="text" name="username" value="{{user.username}}">
       </div>
 
       <br><br> {{!-- <label for="description">Please share your passion on food.</label> --}}
       <h5>Please share your passion on food.</h5>
       <textarea class="form-control" id="description" type="description" name="description" cols="40" rows="5">{{user.description}}</textarea>
       <br><br>
-      <h5>I'm expert for...</h5>
+      <h5>I am an expert for...</h5>
       <ul id="setting-expert">
         {{#each expArr}} {{#if this.value}}
         <li class=“{{this.key}}”><button type="button" class="btn toggle on">{{this.key}}</button>

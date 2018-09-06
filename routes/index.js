@@ -6,12 +6,23 @@ const User = require("../models/User");
 
 /* GET home page */
 router.get('/', (req, res, next) => {
+
+  const expArr = []
+  const foodArr = User.schema.tree.expertIn.enum
+  foodArr.map(el => {
+    let foodObj = {}
+    foodObj["key"] = el;
+    foodObj["value"] = false;
+    expArr.push(foodObj)
+  })
+
   Restaurant.find({}, (err, restaurants) => {
-    console.log(restaurants)
+
     if (err) throw err;
     res.render('index', {
       restaurants,
-      user: req.user
+      user: req.user,
+      expArr
     }); // send restaurants  
   })
 });
@@ -26,7 +37,7 @@ router.get("/restaurant/:id", (req, res, next) => {
 
     let bookmark = false
 
-    if (req.user.bookmarks.indexOf(req.params.id) !== -1) {
+    if (req.user && req.user.bookmarks.indexOf(req.params.id) !== -1) {
       bookmark = true
     }
 

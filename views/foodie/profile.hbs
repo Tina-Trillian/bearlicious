@@ -1,5 +1,6 @@
 <div class="back-white">
-  <div class="my-4"id="profile-name">
+  <div class="content">
+  <div class="mb-4"id="profile-name">
     <h3>{{ profileUser.username }}</h3>
     {{#if sameUser}}
     <a class="btn btn-primary btn-sm" href="/foodie/{{user._id}}/settings" role="button">Edit</a>
@@ -12,17 +13,23 @@
     {{profileUser.description}}
   </div>
 </div>
+</div>
+<div class="back-white m-4">
 <div id="profile-foodie">
   <h4>I'm a local foodie for:</h4>
   {{#each profileUser.expertIn}}
   <a class="btn btn-primary btn-sm" href="#" role="button">{{this}}</a>
   {{/each}}
+</div>
+</div>
 
+<div class="back-white">
 <div id="profile-myrecommend">
   <h4>My recommendations:</h4>
-  </div>
+  
   {{#each profileUser.recommendations}}
   <h3><a href="/restaurant/{{this._id}}">{{this.restName}}</a></h3>
   {{/each}}
+  </div>
 </div>
 </div>

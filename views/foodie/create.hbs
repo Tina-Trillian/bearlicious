@@ -1,9 +1,10 @@
-<div class="back-white">
+<div class="back-white create">
   <div class="back-white-content">
-    <h3>{{restaurant.name}}</h3>
+    <h2>{{restaurant.name}}</h2>
     <p>{{restaurant.address}}</p>
     <form action="/foodie/{{user._id}}/recommendations/new" method="POST">
-      <input type="text" name="_id" value="{{restaurant._id}}">
+      <input type="text" name="_id" class="hidden"value="{{restaurant._id}}">
+      <h5>Your Recommendation</h5>
       <textarea rows="4" cols="50" name="comment">{{comment}}</textarea>
       <div class="button-container">
         <ul id="setting-expert">
@@ -12,10 +13,10 @@
             {{else}}
             <li class=“{{this.key}}”><button type="button" class="btn toggle off">{{this.key}}</button>
               {{/if}} {{/each}}
-              <input name="category" id="expertIn" type="text">
+              <input name="category" class="hidden" id="expertIn" type="text">
         </ul>
       </div>
-      <button type='submit'>Save</button>
+      <button class="btn btn-success" type='submit'>Save</button>
     </form>
   </div>
 </div>

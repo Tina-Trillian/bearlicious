@@ -1,18 +1,20 @@
-<div class="back-white">
-  <div class="back-white-content">
-    <h1>My Bookmarks</h1>
+
+<div class="container-heading">
+  <h1 class="headline-white">My Bookmarks</h1>
+   </div>
     <div>
       {{#each bookmarks}}
+      <div class="back-white mb-3">
       <div class="restaurant-card">
-        <h3><a href="/restaurant/{{this._id}}">{{this.name}}</a></h3>
+        <a href="/restaurant/{{this._id}}"><h3>{{this.name}}</a></h3>
         <div class="restaurant-image">
           <img src="{{this.picPath}}" alt="">
         </div>
-        <div class="restaurant-info">
+         <div class="restaurant-info">
           {{this.description}}
         </div>
       </div>
+      </div>
       {{/each}}
-    </div>
   </div>
 </div>

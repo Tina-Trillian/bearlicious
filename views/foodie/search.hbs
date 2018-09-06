@@ -1,26 +1,30 @@
 <div class="back-white">
   <div class="back-white-content">
-    <h3>Hello, {{user.username}} </h3>
-    <h4>Which restaurant do you want to recommend to other Berliners?</h4>
+    <h2>Hello, {{user.username}} </h2>
+    <h5 class="my-4">Which restaurant do you want to recommend to other Berliners?</h5>
     <div>
-      <form action="/foodie/{{user._id}}/recommendations/search" method="POST">
+      <form class="mb-4"action="/foodie/{{user._id}}/recommendations/search" method="POST">
         <label for="term">Type in the name of the restaurant here!</label>
-        <input type="text" name="term">
-        <button type="submit">Search :)</button>
+        <input class="mb-4"type="text" name="term">
+        <button class="btn btn-dark"type="submit">Search :)</button>
       </form>
+      <div class="mt-3">
       {{#each restaurants}}
-      <p>{{this.name}}</p>
+      <div class="search-card p-4 my-2">
+      <h5>{{this.name}}</h5>
+      <p class="mb-2">{{this.address}}</p>
       <form action="/foodie/{{../ user._id}}/recommendations/create" method="POST">
-        <input type="text" name="coordinates" value="{{this.coordinates}}">
-        <input type="text" name="picPath" value="{{this.picPath}}">
-        <input type="text" name="address" value="{{this.address}}">
-        <input type="text" name="name" value="{{this.name}}">
-        <input type="text" name="phone" value="{{this.phone}}">
-        <input type="text" name="id" value="{{this.id}}">
-        <button type="submit">This is the right one!</button>
+        <input class="hidden" type="text" name="coordinates" value="{{this.coordinates}}">
+        <input class="hidden" type="text" name="picPath" value="{{this.picPath}}">
+        <input class="hidden" type="text" name="address" value="{{this.address}}">
+        <input class="hidden" type="text" name="name" value="{{this.name}}">
+        <input class="hidden" type="text" name="phone" value="{{this.phone}}">
+        <input class="hidden" type="text" name="id" value="{{this.id}}">
+        <button class="btn btn-success" type="submit">This is the right one!</button>
       </form>
-      <p>{{this.address}}</p>
+      </div>
       {{/each}}
+      </div>
     </div>
   </div>
 </div>
