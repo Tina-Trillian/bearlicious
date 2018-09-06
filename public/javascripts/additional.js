@@ -9,7 +9,8 @@ function makeDate(dateStr) {
 
 console.log("makeDate: ", makeDate(updated_at))
 
-document.getElementById("created-on")
+const createdOn = document.getElementById("created-on")
+var element = document.createElement('span');
+element.innerHTML = makeDate(updated_at)
 
-document.getElementsByClassName("make-date").innerHTML = makeDate(updated_at);
-
+createdOn.appendChild(element)

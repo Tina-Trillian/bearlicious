@@ -13,18 +13,16 @@
       {{restaurant.description}}
     </div>
     {{#each restaurant.category}}
-       <a class="btn btn-primary btn-sm" href="#" role="button">{{this}}</a>
-    {{/each}}
-    {{#if user}}
+    <a class="btn btn-primary btn-sm" href="#" role="button">{{this}}</a>
+    {{/each}} {{#if user}}
     <div>
-    <form action="/restaurant/{{restaurant._id}}" method="POST">
-    <input type="text" name="userId" value="{{user._id}}" class="hidden">
-    {{#if bookmark}}
-    <button class="on" type="submit">Remove Bookmark</button>
-    {{else}}
-    <button class="off" type="submit">Add Bookmark</button>
-    {{/if}}
-    </form>
+      <form action="/restaurant/{{restaurant._id}}" method="POST">
+        <input type="text" name="userId" value="{{user._id}}" class="hidden"> {{#if bookmark}}
+        <button class="on" type="submit">Remove Bookmark</button>
+        {{else}}
+        <button class="off" type="submit">Add Bookmark</button>
+        {{/if}}
+      </form>
     </div>
     <h4><a href="/foodie/{{user._id}}/recommendations/create/{{restaurant._id}}">(+) Add or Edit a recommendation</a></h4>
     {{/if}}
@@ -33,7 +31,7 @@
       {{#each restaurant.recommendation}}
       <p>{{this.comment}}</p>
       <p><i>by {{this.author}}</i></p>
-      <p><span id="created-on">created</span> <span class="make-date"><b></b></span><span class="updated_at">{{this.updated_at}}</span></p>
+      <p><span id="created-on">created on: </span> <span class="updated_at hidden">{{this.updated_at}}</span></p>
       {{/each}}
     </div>
   </div>

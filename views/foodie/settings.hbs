@@ -3,17 +3,29 @@
     <h1>Settings</h1>
     {{!--
     <p>{{user}}</p> --}}
+    <form class="mt-4" action="/auth/{{user._id}}/update/picture" method="POST" encType="multipart/form-data">
+      <div class="profile-input">
+        <label for="file" class="setting-label">Profile Picture:</label>
+        <input type="file" name="picture" class="inputfile form-control" placeholder="placeholder">
+      </div>
 
-    <form action="/auth/{{user._id}}/update" method="POST" id="form-container">
-      <label for="username">Username</label>
-      <input id="username" type="text" name="username" value="{{user.username}}">
+      <button>Save the image</button>
+    </form>
+    <form class="mt-2" action="/auth/{{user._id}}/update" method="POST" id="form-container">
+      <div class="mb-3 setting-prifilepic"><img src="{{user.picPath}}" alt=""></div>
 
+      <div class="form-group row">
+        <label for="username" class="setting-label-username">Username: </label>
+        <div class="col-sm-4">
+          <input class="form-control" id="username" type="text" name="username" value="{{user.username}}">
+        </div>
+      </div>
+
+      <br><br> {{!-- <label for="description">Please share your passion on food.</label> --}}
+      <h5>Please share your passion on food.</h5>
+      <textarea class="form-control" id="description" type="description" name="description" cols="40" rows="5">{{user.description}}</textarea>
       <br><br>
-
-      <label for="description">Description</label>
-      <input id="description" type="description" name="description" value="{{user.description}}">
-      <br><br>
-      <h5>I'm expert for</h5>
+      <h5>I'm expert for...</h5>
       <ul id="setting-expert">
         {{#each expArr}} {{#if this.value}}
         <li class=“{{this.key}}”><button type="button" class="btn toggle on">{{this.key}}</button>
@@ -27,16 +39,11 @@
       <br><br>
       <div class="error-message">{{ message }}</div>
       <br><br> {{/if}}
-
-      <button>Update account</button>
-
-      <img src="{{user.picPath}}" alt="" width="100px">
+      <div class="elem-center mt-5">
+        <button class="btn btn-primary">Update account</button>
+      </div>
     </form>
-    <form action="/auth/{{user._id}}/update/picture" method="POST" encType="multipart/form-data">
-      <label for="picture">Profile Picture</label>
-      <input type="file" name="picture" class="form-control" placeholder="No file selected">
-      <button>change Picture</button>
-    </form>
+
     <br><br>
   </div>
 </div>

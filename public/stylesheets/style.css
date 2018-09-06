@@ -119,6 +119,19 @@ nav > ul {
   padding: 20px 0;
   background-color: rgba(255, 255, 255, 0.8); }
 
+#description {
+  width: 100%; }
+
+.profile-input {
+  display: flex; }
+
+.inputfile {
+  background: none;
+  display: inline;
+  padding: 0;
+  font-size: 0.8rem;
+  flex-basis: 50%; }
+
 .recommend-card {
   border: 1px solid #333;
   padding: 10px;
@@ -144,6 +157,23 @@ nav > ul {
 #setting-expert > li > button {
   margin: 3px; }
 
+.setting-label {
+  font-size: 1rem; }
+
+.setting-label-username {
+  font-size: 1rem;
+  margin-left: 14px;
+  margin-top: 8px; }
+
+.setting-prifilepic {
+  border: 2px solid #9c9c9c;
+  width: 100px;
+  height: 100px; }
+
+.setting-prifilepic img {
+  object-fit: contain;
+  width: 100%; }
+
 .google-map-sm {
   width: 250px;
   height: 250px;
@@ -154,6 +184,9 @@ nav > ul {
   width: 80%;
   margin: 0 auto;
   padding: 10px 0; }
+
+.elem-center {
+  text-align: center; }
 
 footer {
   text-align: center;
