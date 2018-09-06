@@ -55,7 +55,7 @@ authRoutes.post("/signup", (req, res, next) => {
       } else {
         req.login(newUser, function (err) {
           if (err) { return next(err); }
-          return res.send(req.user);
+          res.redirect("/")
         });
       }
     });

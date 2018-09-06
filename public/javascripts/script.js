@@ -10,7 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //buttons need to be "pushed" if the User is expert in
   //and input needs to have the correct value
-  if (window.location.href.indexOf('settings') > -1) {
+  if (window.location.href.indexOf('settings') > -1 ||
+      window.location.href.indexOf('create') > -1) {
     $("#expertIn").val();
     let arr = $(".toggle");
     let innerVal = ""
