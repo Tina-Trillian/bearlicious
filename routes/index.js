@@ -31,39 +31,46 @@ router.get('/', (req, res, next) => {
 router.get("/restaurant/:id", (req, res, next) => {
 
   Restaurant.findById(req.params.id)
-  .populate("recommendation")
-  .exec()
-  .then(restaurant => {
+    .populate("recommendation")
+    .exec()
+    .then(restaurant => {
 
-    let bookmark = false
+      let bookmark = false
 
+<<<<<<< HEAD
     if (req.user && req.user.bookmarks.indexOf(req.params.id) !== -1) {
       bookmark = true
     }
+=======
+      if (req.user && req.user.bookmarks.indexOf(req.params.id) !== -1) {
+        bookmark = true
+      }
+>>>>>>> 27d109f4b567cc878354829a4a596e0e1f412457
 
-    res.render("restaurant/restaurant", {
+      res.render("restaurant/restaurant", {
         restaurant,
         user: req.user,
         bookmark,
+      })
     })
-  })
 })
 
 router.post("/restaurant/:id", (req, res, next) => {
 
-  
+
   User.findById(req.body.userId)
-  .then(result => {
-    if (result.bookmarks.indexOf(req.params.id) === -1) {
-      result.bookmarks = result.bookmarks.concat([req.params.id])
-      result.save();
-    }
-    else if (result.bookmarks.indexOf(req.params.id) !== -1){
-      let index = result.bookmarks.indexOf(req.params.id)
-      result.bookmarks.splice(index,1)
-      result.save()}
-    res.redirect(`/restaurant/${req.params.id}`)
-  })
+    .then(result => {
+      if (result.bookmarks.indexOf(req.params.id) === -1) {
+        result.bookmarks = result.bookmarks.concat([req.params.id])
+        result.save();
+      }
+      else if (result.bookmarks.indexOf(req.params.id) !== -1) {
+        let index = result.bookmarks.indexOf(req.params.id)
+        result.bookmarks.splice(index, 1)
+        result.save()
+      }
+      res.redirect(`/restaurant/${req.params.id}`)
+    })
 })
 
 module.exports = router;

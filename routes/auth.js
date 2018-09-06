@@ -24,7 +24,7 @@ authRoutes.get("/signup", (req, res, next) => {
 });
 
 authRoutes.post("/signup", (req, res, next) => {
-  const {username, email, password} = req.body
+  const { username, email, password } = req.body
   if (username === "" || password === "" || email === "") {
     res.render("auth/signup", { message: "Indicate username, email and password" });
     return;
@@ -73,10 +73,10 @@ authRoutes.post("/:id/update/picture", (req, res, next) => {
 
 
   User.findByIdAndUpdate(req.params.id, {
-    picPath : `/images/profilePics/${req.files.picture.name}`
- }, {new: true}).then(user => {
-   res.redirect(`/foodie/${req.params.id}/settings`)
- })
+    picPath: `/images/profilePics/${req.files.picture.name}`
+  }, { new: true }).then(user => {
+    res.redirect(`/foodie/${req.params.id}/settings`)
+  })
 })
 
 //picture update needs to be before(!) normal update, otherwise throws
@@ -84,7 +84,7 @@ authRoutes.post("/:id/update/picture", (req, res, next) => {
 
 authRoutes.post("/:id/update", (req, res, next) => {
   console.log(req.url)
-  const {username, description, expertIn} = req.body
+  const { username, description, expertIn } = req.body
   if (username === "") {
     res.render("auth/update", { message: "Please enter a User name!" });
     return;
@@ -92,21 +92,39 @@ authRoutes.post("/:id/update", (req, res, next) => {
   let clean = expertIn.split(",")
   clean = clean.filter(el => el.length > 0)
 
-  
+
   User.findByIdAndUpdate(req.params.id, {
-     username,
-     description,
-     expertIn : clean,
-  }, {new: true}).then(user => {
+    username,
+    description,
+    expertIn: clean,
+  }, { new: true }).then(user => {
     res.redirect("/")
   })
 });
 
+// ====== Facebook Authentification ===== //
+// Redirect the user to Facebook for authentication.  When complete,
+// Facebook will redirect the user back to the application at
+//     /auth/facebook/callback
+authRoutes.get('/facebook', passport.authenticate('facebook'));
 
+// Facebook will redirect the user to this URL after approval.  Finish the
+// authentication process by attempting to obtain an access token.  If
+// access was granted, the user will be logged in.  Otherwise,
+// authentication has failed.
+authRoutes.get('/facebook/callback',
+  passport.authenticate('facebook', {
+    successRedirect: '/',
+    failureRedirect: '/login'
+  }));
 
 authRoutes.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/");
 });
+
+authRoutes.get('/facebook',
+  passport.authenticate('facebook', { scope: ['read_stream', 'publish_actions'] })
+);
 
 module.exports = authRoutes;
