@@ -14,11 +14,11 @@
     </div>
     {{#if user}}
     <div>
-    <form action="/restaurant/{{restaurant._id}}" method="POST">
-    <input type="text" name="userId" value="{{user._id}}">
-    <button type="submit">Add Bookmark
-    </button>
-    </form>
+      <form action="/restaurant/{{restaurant._id}}" method="POST">
+        <input type="text" name="userId" value="{{user._id}}">
+        <button type="submit">Add Bookmark
+        </button>
+      </form>
     </div>
     <h4><a href="/foodie/{{user._id}}/recommendations/create/{{restaurant._id}}">(+) Add or Edit a recommendation</a></h4>
     {{/if}}
@@ -27,7 +27,7 @@
       {{#each restaurant.recommendation}}
       <p>{{this.comment}}</p>
       <p><i>by {{this.author}}</i></p>
-      <p><span id="created-on">created</span> <span class="make-date"><b></b></span><span class="updated_at">{{this.updated_at}}</span></p>
+      <p><span id="created-on">created on: </span> <span class="updated_at hidden">{{this.updated_at}}</span></p>
       {{/each}}
     </div>
   </div>
