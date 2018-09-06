@@ -18,9 +18,12 @@
     {{#if user}}
     <div>
     <form action="/restaurant/{{restaurant._id}}" method="POST">
-    <input type="text" name="userId" value="{{user._id}}">
-    <button type="submit">Add Bookmark
-    </button>
+    <input type="text" name="userId" value="{{user._id}}" class="hidden">
+    {{#if bookmark}}
+    <button class="on" type="submit">Remove Bookmark</button>
+    {{else}}
+    <button class="off" type="submit">Add Bookmark</button>
+    {{/if}}
     </form>
     </div>
     <h4><a href="/foodie/{{user._id}}/recommendations/create/{{restaurant._id}}">(+) Add or Edit a recommendation</a></h4>

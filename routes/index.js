@@ -23,20 +23,36 @@ router.get("/restaurant/:id", (req, res, next) => {
   .populate("recommendation")
   .exec()
   .then(restaurant => {
+
+    let bookmark = false
+
+    if (req.user.bookmarks.indexOf(req.params.id) === 0) {
+      bookmark = true
+    }
+
     res.render("restaurant/restaurant", {
         restaurant,
-        user: req.user
+        user: req.user,
+        bookmark,
     })
   })
 })
 
 router.post("/restaurant/:id", (req, res, next) => {
 
-  User.findByIdAndUpdate(req.body.userId, {$push: {
-    bookmarks: req.params.id
-  }}, {new: true}).then(result =>
+  
+  User.findById(req.body.userId)
+  .then(result => {
+    if (result.bookmarks.indexOf(req.params.id) === -1) {
+      result.bookmarks = result.bookmarks.concat([req.params.id])
+      result.save();
+    }
+    else if (result.bookmarks.indexOf(req.params.id) !== -1){
+      let index = result.bookmarks.indexOf(req.params.id)
+      result.bookmarks.splice(index,1)
+      result.save()}
     res.redirect(`/restaurant/${req.params.id}`)
-  )
+  })
 })
 
 module.exports = router;

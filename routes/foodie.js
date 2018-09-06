@@ -115,13 +115,7 @@ router.get("/:id/recommendations", (req, res, next) => {
     })
   })
 
- 
 
-
-
-  // res.render("foodie/recommendations", {
-  //   user: req.user,
-  // })
 
 })
 
