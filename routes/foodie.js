@@ -10,10 +10,25 @@ const getRightPlace = Places.getRightPlace;
 
 //add ":id" later to the route, when we have models
 router.get('/profile/:id', (req, res, next) => {
-  User.findById(req.params.id).then(user => {
+  User.findById(req.params.id)
+  .populate({
+    path: 'recommendations',
+    populate: { path: 'restId' }
+  })
+  .then(user => {
+    let sameUser = false
+
+    console.log("REQ", typeof req.user._id)
+    console.log("USER",typeof user._id)
+    if (req.user._id.toString() == user._id.toString()) {
+      sameUser = true
+    }
+    console.log("DEBUG",sameUser)
+    
     res.render('foodie/profile', { 
       user: req.user,
-      profileUser: user });
+      profileUser: user,
+      sameUser, });
   })
 });
 
@@ -52,10 +67,20 @@ router.get("/:id/settings", (req, res, next) => {
 
 //we don't need to search the Database for the right User here,
 //because of the middleWare protection
-router.get("/:id/bookmarks", (req, res, next) => {
-  res.render("foodie/bookmark", {
-    user: req.user
+router.get("/:id/bookmark", (req, res, next) => {
+
+  User.findById(req.params.id)
+  .populate("bookmarks")
+  .exec()
+  .then(result => {
+
+    res.render("foodie/bookmark", {
+      user: req.user,
+      bookmarks : result.bookmarks
+    })
   })
+
+  
 })
 
 //when the user wants to access this route and does NOT have expertIn or
@@ -112,7 +137,7 @@ router.post("/:id/recommendations/search", (req, res, next) => {
   const {term} = req.body
   
   getThreeResults({term, location: "Berlin, germany"}).then(restaurants => {
-    console.log(restaurants);
+    //console.log(restaurants);
     res.render("foodie/search", {restaurants, user : req.user})})
   .catch(err => console(err))
 })
@@ -120,17 +145,35 @@ router.post("/:id/recommendations/search", (req, res, next) => {
 router.get("/:id/recommendations/create/:restid", (req,res,next) => {
   
 
+  const expArr = []
+  const foodArr = User.schema.tree.expertIn.enum
+  foodArr.map(el => {
+    let foodObj = {}
+    foodObj["key"] = el;
+    foodObj["value"] = false;
+    expArr.push(foodObj)
+  })
+// console.log(foodArr)
 
   User.findById(req.params.id)
     .populate("recommendations")
     .exec()
     .then(result => {
-        let comment;
+      let comment;
       result.recommendations.forEach(el => {
         if(req.params.restid == el.restId)
-          comment = el.comment
-        
+        comment = el.comment
+      })
+
+
         Rest.findById(req.params.restid).then(restaurant => {
+          restaurant.category.forEach(category => {
+              expArr.forEach(button => {
+                if(button.key == category) 
+                {button.value = true}
+              })
+          })
+          
           res.render("foodie/create", {
             user: req.user,
             restaurant,
@@ -138,7 +181,6 @@ router.get("/:id/recommendations/create/:restid", (req,res,next) => {
             expArr,
           })
         })
-      })
     })
 })
 
@@ -189,7 +231,7 @@ router.post("/:id/recommendations/create", (req, res, next) => {
           })
         })
 
-        console.log(expArr)
+        // console.log(expArr)
         
         res.render("foodie/create", {
           user: req.user,
@@ -203,90 +245,46 @@ router.post("/:id/recommendations/create", (req, res, next) => {
 
 router.post("/:id/recommendations/new", (req, res, next) => {
 
+  let clean = req.body.category.split(",")
+  clean = clean.filter(el => el.length > 0)
 
- User.findById(req.user.id).then(user => {
+
+ User.findById(req.user.id)
+ 
+ .then(user => {
 
     Rest.findById(req.body._id)
+    .populate("recommendation")
+    .exec()
     .then(restaurant => {
 
-        let newRecom = new Recom({
-          comment: req.body.comment,
+      Recom.findOneAndUpdate({authorId : user._id}, {
+        comment: req.body.comment,
           author: req.user.username,
           restName: restaurant.name,
           authorId: req.user._id,
           restId: restaurant._id,
-        })
-        .save()
-        .then(result => {
-          user.recommendations = user.recommendations.concat([result._id])
-          user.save()
-          restaurant.recommendation = restaurant.recommendation.concat([result._id])
-          restaurant.save()
-          console.log("REST",restaurant.recommendation)
-          console.log("USER",user.recommendations)
-        })
-        .then(result => {
-          res.redirect(`/restaurant/${restaurant._id}`)
-        })
+      }, {upsert: true, new: true})
+      .then(comment => {
+
+        restaurant.recommendation.filter(recom => (recom._id.toString() == comment._id.toString()))
+            if (user.recommendations.indexOf(comment._id) == -1)
+            {user.recommendations = user.recommendations.concat([comment._id])
+            user.save()}
+            if ((restaurant.recommendation.filter(recom => (recom._id.toString() == comment._id.toString()))).length === 0 )
+            {restaurant.recommendation = restaurant.recommendation.concat([comment._id])
+            restaurant.category = clean;
+            restaurant.save()}
+          })
+          .then(result => {
+            res.redirect(`/restaurant/${restaurant._id}`)
+          })
+    
+      })
+  
      })  
   })
-})
 
-  //   if (rest === null) {
-  //     const newRes = new Rest({
-  //       name,
-  //       yelpId,
-  //       phone,
-  //       picPath,
-  //       address: arrAddress,
-  //       location: {
-  //         type: "Point",
-  //         coordinates: numberArray,
-  //       }
-  //     })
-
-  //     const newRec = new Recom({
-  //       comment: comment,
-  //       author: req.user.username,
-  //       restName: newRes.name,
-  //       author_id: req.user._id,
-  //     }).save().then(result => {
-  //       User.findById(req.user.id).then(user => {
-  //         user.recommendation.push(result._id)
-  //       }).save()
-  //       newRes.recommendation.push(result._id)
-  //     })
-
-  //     newRes.save()
-
-  //     res.send(newRes)
-  //     restaurant = newRes
-  //     // res.redirect(`/restaurant/${newRes._id}`)
-  //   }
-  //   else {
-
-  //     rest.recommendation = rest.recommendation.concat([{
-  //       comment: comment,
-  //       author: req.user.username,
-  //       restName: rest.name,
-  //       author_id: req.user._id,
-  //     }])
-
-  //     rest.save();
-
-  //     restaurant = rest
-  //   console.log("22222",rest)
-
-   
-  // }
-  // return restaurant;
-  // }).then(result => {
-  //   console.log(result)
-  //   res.redirect(`/restaurant/${result._id}`)
-  // })
-
-
-// })
 
 
 

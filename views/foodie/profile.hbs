@@ -1,7 +1,9 @@
 <div class="back-white">
   <div id="profile-name">
     <h3>{{ profileUser.username }}</h3>
-    <a class="btn btn-primary btn-sm" href="/foodie/:id/settings" role="button">Edit</a>
+    {{#if sameUser}}
+    <a class="btn btn-primary btn-sm" href="/foodie/{{user._id}}/settings" role="button">Edit</a>
+    {{/if}}
   </div>
   <div id="profile-userimage">
     <img src="{{profileUser.picPath}}" alt="">
@@ -19,14 +21,12 @@
   {{#each profileUser.expertIn}}
   <a class="btn btn-primary btn-sm" href="#" role="button">{{this}}</a>
   {{/each}}
-</div>
+
 <div id="profile-myrecommend">
   <h4>My recommendations:</h4>
-  <div class="google-map-sm">
-    {{profileUser}}
   </div>
   {{#each profileUser.recommendations}}
-  <h3>{{this.restName}}</h3>
-  <p>{{this.comment}}</p>
+  <h3><a href="/restaurant/{{this._id}}">{{this.restName}}</a></h3>
   {{/each}}
+</div>
 </div>

@@ -12,6 +12,9 @@
       <p>(The description goes here)</p>
       {{restaurant.description}}
     </div>
+    {{#each restaurant.category}}
+       <a class="btn btn-primary btn-sm" href="#" role="button">{{this}}</a>
+    {{/each}}
     {{#if user}}
     <div>
     <form action="/restaurant/{{restaurant._id}}" method="POST">
