@@ -22,7 +22,10 @@ const userSchema = new Schema({
   picPath: String,
   facebookId: String,
   googleId: String,
-  bookmarks: [Schema.Types.ObjectId],
+  bookmarks: [{
+    type : Schema.Types.ObjectId,
+    ref: "Rest"
+  }],
   recommendations: [{
     type: Schema.Types.ObjectId,
     ref: "Recommend"}],

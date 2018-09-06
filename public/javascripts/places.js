@@ -8,10 +8,10 @@ const apiKey = 'zp6urmQCYX9kpjwpgo3dAYru9hqDJ7j-6biVsxa7WzguaZ8Yj15fNZ5DXoD47t9_
 
 //This is just to check the api - to see if it is working
 //will later be obsolete if we get input from the User
-const searchRequest = {
-  term:'coffee',
-  location: 'Berlin, germany'
-};
+// const searchRequest = {
+//   term:'coffee',
+//   location: 'Berlin, germany'
+// };
 
 const client = yelp.client(apiKey);
 
