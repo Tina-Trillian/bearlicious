@@ -16,7 +16,7 @@ function initMap() {
   );
   const marker = new google.maps.Marker({ position: locationData, map: restMap });
   marker.setMap(restMap);
-  console.log(marker);
+  console.log("marker: ", marker);
 }
 
 initMap();
