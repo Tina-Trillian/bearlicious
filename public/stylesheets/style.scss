@@ -243,6 +243,16 @@ nav > ul {
   text-align: center;
 }
 
+.restaurant-card {
+  border-bottom: 1px solid #bbb;
+  padding: 15px 0;
+}
+
+.restaurant-card:last-child {
+  border-bottom: none;
+}
+
+
 footer {
   text-align: center;
   background-color: #111;
