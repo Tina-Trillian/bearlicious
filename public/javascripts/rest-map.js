@@ -12,7 +12,11 @@ function initMap() {
 
 
   const restMap = new google.maps.Map(
-    document.getElementById('restaurant-map'), { zoom: 15, center: locationData }
+    document.getElementById('restaurant-map'), {
+      zoom: 14,
+      center: locationData,
+      disableDefaultUI: true
+    }
   );
   const marker = new google.maps.Marker({ position: locationData, map: restMap });
   marker.setMap(restMap);
