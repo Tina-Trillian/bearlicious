@@ -4,8 +4,6 @@
       <img src="{{restaurant.picPath}}" alt="" width="400">
     </div>
     <h3>{{restaurant.name}}</h3>
-    {{!--
-    <p>{{restaurant}}</p> --}}
     <p>{{restaurant.address}}</p>
     <p>{{restaurant.phone}}</p>
     <p class="hidden" id="each-res-location">{{ restaurant.location.coordinates}}</p>
@@ -14,7 +12,16 @@
       <p>(The description goes here)</p>
       {{restaurant.description}}
     </div>
+    {{#if user}}
+    <div>
+    <form action="/restaurant/{{restaurant._id}}" method="POST">
+    <input type="text" name="userId" value="{{user._id}}">
+    <button type="submit">Add Bookmark
+    </button>
+    </form>
+    </div>
     <h4><a href="/foodie/{{user._id}}/recommendations/create/{{restaurant._id}}">(+) Add or Edit a recommendation</a></h4>
+    {{/if}}
     <h4>Recommendations</h4>
     <div class="recommend-card">
       {{#each restaurant.recommendation}}

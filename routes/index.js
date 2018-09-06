@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Restaurant = require("../models/Restaurant");
 const recommendation = require("../models/Recommend");
+const User = require("../models/User");
 
 /* GET home page */
 router.get('/', (req, res, next) => {
@@ -17,7 +18,7 @@ router.get('/', (req, res, next) => {
 
 
 router.get("/restaurant/:id", (req, res, next) => {
-  
+
   Restaurant.findById(req.params.id)
   .populate("recommendation")
   .exec()
@@ -27,6 +28,15 @@ router.get("/restaurant/:id", (req, res, next) => {
         user: req.user
     })
   })
+})
+
+router.post("/restaurant/:id", (req, res, next) => {
+
+  User.findByIdAndUpdate(req.body.userId, {$push: {
+    bookmarks: req.params.id
+  }}, {new: true}).then(result =>
+    res.redirect(`/restaurant/${req.params.id}`)
+  )
 })
 
 module.exports = router;

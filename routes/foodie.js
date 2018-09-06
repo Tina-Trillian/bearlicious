@@ -11,7 +11,9 @@ const getRightPlace = Places.getRightPlace;
 //add ":id" later to the route, when we have models
 router.get('/profile/:id', (req, res, next) => {
   User.findById(req.params.id).then(user => {
-    res.render('foodie/profile', { profileUser: user });
+    res.render('foodie/profile', { 
+      user: req.user,
+      profileUser: user });
   })
 });
 
@@ -42,7 +44,6 @@ router.get("/:id/settings", (req, res, next) => {
     expArr.push(foodObj)
   })
 
-  console.log(expArr)
   res.render("foodie/settings", {
     user: req.user,
     expArr,
@@ -117,7 +118,28 @@ router.post("/:id/recommendations/search", (req, res, next) => {
 })
 
 router.get("/:id/recommendations/create/:restid", (req,res,next) => {
-  res.send(req.params.restid)
+  
+
+
+  User.findById(req.params.id)
+    .populate("recommendations")
+    .exec()
+    .then(result => {
+        let comment;
+      result.recommendations.forEach(el => {
+        if(req.params.restid == el.restId)
+          comment = el.comment
+        
+        Rest.findById(req.params.restid).then(restaurant => {
+          res.render("foodie/create", {
+            user: req.user,
+            restaurant,
+            comment,
+            expArr,
+          })
+        })
+      })
+    })
 })
 
 router.post("/:id/recommendations/create", (req, res, next) => {
@@ -127,9 +149,17 @@ router.post("/:id/recommendations/create", (req, res, next) => {
     const numberArray = arrCoordinates.map(el => {
     return parseFloat(el);
   })
+
+  const expArr = []
+  const foodArr = User.schema.tree.expertIn.enum
+  foodArr.map(el => {
+    let foodObj = {}
+    foodObj["key"] = el;
+    foodObj["value"] = false;
+    expArr.push(foodObj)
+  })
   
     Rest.findOne({yelpId : id}).then(restaurant => {
-      
       
       if(!restaurant) {
         new Rest({
@@ -146,13 +176,25 @@ router.post("/:id/recommendations/create", (req, res, next) => {
           res.render("foodie/create", {
             user: req.user,
             restaurant : rest,
+            expArr,
           })
         })
       }
       else {
+
+        restaurant.category.forEach(food => {
+          expArr.forEach(button => {
+            if(food === button.key)
+            {button.value = true}
+          })
+        })
+
+        console.log(expArr)
+        
         res.render("foodie/create", {
           user: req.user,
           restaurant,
+          expArr,
         })
       }
   })
