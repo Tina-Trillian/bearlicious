@@ -252,7 +252,7 @@ router.post("/:id/recommendations/new", (req, res, next) => {
     .exec()
     .then(restaurant => {
 
-      Recom.findOneAndUpdate({authorId : user._id}, {
+      Recom.findOneAndUpdate({authorId : user._id, restId : restaurant._id}, {
         comment: req.body.comment,
           author: req.user.username,
           restName: restaurant.name,
@@ -260,11 +260,15 @@ router.post("/:id/recommendations/new", (req, res, next) => {
           restId: restaurant._id,
       }, {upsert: true, new: true})
       .then(comment => {
-
-        restaurant.recommendation.filter(recom => (recom._id.toString() == comment._id.toString()))
+        console.log("BEFORE", user.recommendations)
+        console.log("COMMENTID", comment._id)
+        console.log("MIDDLE", user.recommendations.indexOf(comment._id))
             if (user.recommendations.indexOf(comment._id) == -1)
-            {user.recommendations = user.recommendations.concat([comment._id])
-            user.save()}
+            {
+            
+            user.recommendations = user.recommendations.concat([comment._id])
+            user.save()
+            console.log("AFTER", user.recommendations)}
             if ((restaurant.recommendation.filter(recom => (recom._id.toString() == comment._id.toString()))).length === 0 )
             {restaurant.recommendation = restaurant.recommendation.concat([comment._id])
             restaurant.category = clean;
