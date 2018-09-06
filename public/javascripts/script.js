@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //and input needs to have the correct value
   if (window.location.href.indexOf('settings') > -1 ||
       window.location.href.indexOf('create') > -1) {
+        console.log("right side")
     $("#expertIn").val();
     let arr = $(".toggle");
     let innerVal = ""

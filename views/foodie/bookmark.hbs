@@ -1,14 +1,14 @@
 <h1>My Bookmarks</h1>
 <div class="bg-white">
-  (list of the restaurants the bookmarks)
+  {{#each bookmarks}}
   <div class="restaurant-card">
-    <h3>(Restaurant Name)</h3>
+    <h3><a href="/restaurant/{{this._id}}">{{this.name}}</a></h3>
     <div class="restaurant-image">
-      (#restaurant-image)
+      <img src="{{this.picPath}}" alt="">
     </div>
     <div class="restaurant-info">
-      (#restaurant-info)
+      {{this.description}}
     </div>
-    <a class="btn btn-primary" href="#" role="button">Delete</a>
+  {{/each}}
   </div>
 </div>
