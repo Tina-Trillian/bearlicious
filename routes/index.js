@@ -27,6 +27,36 @@ router.get('/', (req, res, next) => {
   })
 });
 
+router.get('/:filter', (req, res, next) => {
+
+  const expArr = []
+  const foodArr = User.schema.tree.expertIn.enum
+  foodArr.map(el => {
+    let foodObj = {}
+    foodObj["key"] = el;
+    foodObj["value"] = false;
+    expArr.push(foodObj)
+  })
+
+ 
+  expArr.forEach(el => {
+    if (el.key === req.params.filter) {
+      el.value = true
+    }
+  })
+
+
+  Restaurant.find({}, (err, restaurants) => {
+
+    if (err) throw err;
+    res.render('index', {
+      restaurants,
+      user: req.user,
+      expArr
+    }); // send restaurants  
+  })
+});
+
 
 router.get("/restaurant/:id", (req, res, next) => {
 
@@ -37,15 +67,9 @@ router.get("/restaurant/:id", (req, res, next) => {
 
       let bookmark = false
 
-<<<<<<< HEAD
     if (req.user && req.user.bookmarks.indexOf(req.params.id) !== -1) {
       bookmark = true
     }
-=======
-      if (req.user && req.user.bookmarks.indexOf(req.params.id) !== -1) {
-        bookmark = true
-      }
->>>>>>> 27d109f4b567cc878354829a4a596e0e1f412457
 
       res.render("restaurant/restaurant", {
         restaurant,

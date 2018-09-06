@@ -39,6 +39,15 @@ html {
   background-size: cover;
 }
 
+.btn:active,
+.btn:focus,
+.btn.active {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
 .dropdown {
   display: flex;
   flex-basis: 30%;
@@ -114,6 +123,7 @@ nav > ul {
 }
 .food-categories {
   margin: 0 auto;
+  text-align: center
 }
 
 .food-categories > ul > li{

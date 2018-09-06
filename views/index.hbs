@@ -11,12 +11,16 @@
 
     {{/each}}
   </div>
-  <div class="food-categories">
-      <ul id="setting-expert">
+  <div class="food-categories my-3">
+      <div id="setting-expert">
         {{#each expArr}}
-          <li class=“{{this.key}}”><button type="button" class="btn toggle-index off">{{this.key}}</button>
+          {{#if this.value}}
+            <button  type="button" class="m-2 btn toggle-index on">{{this.key}}</button>
+          {{else}}
+            <button type="button" class="btn toggle-index m-2 off">{{this.key}}</button>
+          {{/if}}       
         {{/each}}
-        </ul>
+        </div>
   </div>
   <div id="index-googlemap"></div>
 </div>

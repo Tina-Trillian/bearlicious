@@ -8,16 +8,15 @@ document.addEventListener('DOMContentLoaded', () => {
   //to the hidden intput, so it gets send with the req.body
 
   if (window.location.href.indexOf('index')) {
-      startMap("Sushi")
+      startMap($(".on").text())
 
       $(".toggle-index").on("click", function () {
         $(this).toggleClass("on off");
         if ($(this).hasClass("on")) {
-          console.log($("toggle-index").siblings())
+          $(this).siblings().removeClass("on off").addClass("off")
         }
-        else if ($(this).hasClass("off")) {
-
-        }
+        let filter = $(".on").text()
+        startMap(filter)
       })
 
 
