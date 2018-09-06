@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Rest = require('../models/Restaurant');
 
 // const dbName = 'awesome-project';
-mongoose.connect(`mongodb://localhost/bearlicious`);
+mongoose.connect(process.env.MONGODB_URI);
 
 const restaurants = [
   {

@@ -11,13 +11,5 @@ console.log("makeDate: ", makeDate(updated_at))
 
 document.getElementById("created-on")
 
-
-// var parent = document.getElementById('parent');
-// var firstChild = document.getElementById('first-child');
-// var pTag = document.createElement('p');
-// var text = document.createTextNode('This text is created dynamically');
-
-// pTag.appenChild(text);
-// parent.insertBefore(pTag, firstChild);
-
+document.getElementsByClassName("make-date").innerHTML = makeDate(updated_at);
 
