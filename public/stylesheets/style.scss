@@ -63,6 +63,9 @@ nav > ul {
   padding-bottom: 20px;
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 // white-transparent background
@@ -71,6 +74,13 @@ nav > ul {
   width: 80vw;
   margin: 0 auto;
   border-radius: 10px;
+}
+
+//content box to center content in the middle
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 // tagline for index page

@@ -19,7 +19,10 @@ const userSchema = new Schema({
   description: {
     type: String,
   },
-  picPath: String,
+  picPath: {
+    type: String,
+    default: "/images/default-userpic.png",
+  },
   facebookId: String,
   googleId: String,
   bookmarks: [{
