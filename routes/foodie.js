@@ -104,17 +104,43 @@ router.get("/:id/recommendations", (req, res, next) => {
   }).then(result => {
     let restaurants = []
     result.recommendations.forEach(el => {
-      restaurants.push(el.restId)
+      restaurantObj = {}
+      restaurantObj.name = el.restId.name
+      restaurantObj.picPath = el.restId.picPath
+      restaurantObj._id = el.restId._id
+      restaurantObj.recommendId = el._id
+      restaurantObj.userId = el.authorId
+      restaurants.push(restaurantObj)
     })
+    console.log("RESTAURANT",restaurants)
     res.render("foodie/recommendations", {
       user: req.user,
       restaurants
     })
   })
 
-
-
 })
+
+//Later we will implement a delete and edit button for the recommendations
+//Not enough time right now
+
+// router.get("/:id/recommendations/delete/:recomId", (req, res, next) => {
+  
+//   // Recom.findByIdAndRemove(req.params.recomId).then(result =>
+//   //   console.log(result)
+//   // )
+
+//   // User.findById(req.params.id).then(user => {
+//   //   console.log("BEFORE", user.recommendations)
+//   //   let index = user.recommendations.indexOf(req.params.recomId)
+//   //   user.recommendations.splice(index,1)
+//   //   user.save()
+//   //   console.log("AFTER", user.recommendations)
+//   // })
+
+//   Recom.fin
+// })
+
 
 router.get("/:id/recommendations/search", (req, res, next) => {
   
