@@ -3,7 +3,7 @@
     <h2>{{restaurant.name}}</h2>
     <p>{{restaurant.address}}</p>
     <form action="/foodie/{{user._id}}/recommendations/new" method="POST">
-      <input type="text" name="_id" class="hidden"value="{{restaurant._id}}">
+      <input type="text" name="_id" class="hidden" value="{{restaurant._id}}">
       <h5>Your Recommendation</h5>
       <textarea rows="4" cols="50" name="comment">{{comment}}</textarea>
       <div class="button-container my-3">
@@ -13,7 +13,7 @@
             {{else}}
             <li class=“{{this.key}}”><button type="button" class="btn toggle off">{{this.key}}</button>
               {{/if}} {{/each}}
-              <input name="category" id="expertIn"  type="text">
+              <input class="hidden" name="category" id="expertIn" type="text">
         </ul>
       </div>
       <button class="btn btn-success" type='submit'>Save</button>
