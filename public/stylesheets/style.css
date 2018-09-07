@@ -127,7 +127,7 @@ nav > ul {
   background-color: #054b37; }
 
 .off-white {
-  color: #FBFBF2; }
+  color: #fbfbf2; }
 
 .tagline {
   text-align: center;
@@ -151,7 +151,7 @@ nav > ul {
   height: 70vh;
   background-color: #665656;
   margin: 0px auto;
-  z-index: 100; }
+  z-index: 1; }
 
 .hidden {
   display: none; }
@@ -185,7 +185,8 @@ nav > ul {
   font-size: 1.05rem;
   text-align: center; }
 
-#profile-foodie, #profile-myrecommend {
+#profile-foodie,
+#profile-myrecommend {
   width: 60vw;
   text-align: center; }
 
@@ -303,6 +304,7 @@ ul {
 
 footer {
   position: fixed;
+  z-index: 3;
   bottom: 0px;
   width: 100%;
   height: 30px;
@@ -310,5 +312,8 @@ footer {
   background-color: #111;
   color: #fff;
   font-size: 0.8rem; }
+
+.back {
+  z-index: -4; }
 
 /*# sourceMappingURL=style.css.map */
