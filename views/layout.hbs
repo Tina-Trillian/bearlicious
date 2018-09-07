@@ -10,60 +10,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7U1ZJ_UFGajH9QOgchtqZ8PiRO3FzJWM"></script> {{!--
-<script
-  src='/javascripts/facebook-auth.js'></script> --}}
+<sgicript src='/javascripts/facebook-auth.js'>
+  </script> --}}
 
-<body>
-  <nav class="d-flex align-items-center py-2">
-    <h4 class="my-0"><a href="/" class="off-white white-link font-weight-bold">Bearlicious</a></h4>
-    {{#if user}}
+  <body>
+    <nav class="d-flex align-items-center py-2">
+      <h4 class="my-0"><a href="/" class="off-white white-link font-weight-bold">Bearlicious</a></h4>
+      {{#if user}}
 
-    <div class="dropdown d-flex justify-content-end">
-      <div id="dropdown-userpic">
-        {{#if user.picPath}}
-        <img src="{{user.picPath}}" alt=""> {{else}}
-        <img src="/images/default-userpic.png" alt=""> {{/if}}
+      <div class="dropdown d-flex justify-content-end">
+        <div id="dropdown-userpic">
+          {{#if user.picPath}}
+          <img src="{{user.picPath}}" alt=""> {{else}}
+          <img src="/images/default-userpic.png" alt=""> {{/if}}
+        </div>
+        <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          {{user.username}}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="/foodie/profile/{{user._id}}">Profile</a>
+          <a class="dropdown-item" href="/foodie/{{user._id}}/recommendations">Recommendation</a>
+          <a class="dropdown-item" href="/foodie/{{user._id}}/bookmark">Bookmark</a>
+          <a class="dropdown-item" href="/foodie/{{user._id}}/settings">Settings</a>
+          <a class="dropdown-item" href="/auth/logout">Log Out</a>
+        </div>
       </div>
-      <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-        aria-expanded="false">
-        {{user.username}}
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="/foodie/profile/{{user._id}}">Profile</a>
-        <a class="dropdown-item" href="/foodie/{{user._id}}/recommendations">Recommendation</a>
-        <a class="dropdown-item" href="/foodie/{{user._id}}/bookmark">Bookmark</a>
-        <a class="dropdown-item" href="/foodie/{{user._id}}/settings">Settings</a>
-        <a class="dropdown-item" href="/auth/logout">Log Out</a>
-      </div>
+      {{else}}
+      <ul class="my-0 d-flex justify-content-end">
+        <li class="mx-2"><a href="/auth/login" class="off btn btn-sign btn-outline-secondary btn-sm">Log In</a></li>
+        <li><a href="/auth/signup" class="off btn btn-sign btn-secondary btn-sm">Sign Up</a></li>
+      </ul>
+      {{/if}}
+    </nav>
+
+    <div class="bg">
+      {{{body}}}
     </div>
-    {{else}}
-    <ul class="my-0 d-flex justify-content-end">
-      <li class="mx-2"><a href="/auth/login" class="off btn btn-sign btn-outline-secondary btn-sm">Log In</a></li>
-      <li><a href="/auth/signup" class="off btn btn-sign btn-secondary btn-sm">Sign Up</a></li>
-    </ul>
-    {{/if}}
-  </nav>
 
-  <div class="bg">
-    {{{body}}}
-  </div>
+    <footer class="d-flex align-items-center justify-content-center">&copy Bearlicious 2018 | <a class="ml-2" href="/about/">About</a></footer>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"></script>
+    <script src='/javascripts/map.js'></script>
+    <script src='/javascripts/additional.js'></script>
+    <script src='/javascripts/script.js'></script>
 
-<<<<<<< HEAD
-  <footer>&copy Bearlicious 2018 | <a href="/about/">About</a></footer>
-
-=======
-  <footer class="d-flex align-items-center justify-content-center">&copy Bearlicious 2018 | <a class="ml-2" href="/about/">About</a></footer>
->>>>>>> e413e3020a537002d612f527793def6a0cc8a5e3
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-    crossorigin="anonymous"></script>
-  <script src='/javascripts/map.js'></script>
-  <script src='/javascripts/additional.js'></script>
-  <script src='/javascripts/script.js'></script>
-
-</body>
+  </body>
 
 </html>

@@ -1,6 +1,6 @@
 <div class="content">
   <div class="tagline">
-    <h4>Find the best places to eat, drink in Berlin. Access over 1 million tips from local foodies.</h4>
+    <h4>Find the best places to eat and drink in Berlin. <br> Tips from local foodies who know the best food.</h4>
   </div>
   <div id="index-res" class="hidden">
     {{#each restaurants}}
@@ -12,15 +12,13 @@
     {{/each}}
   </div>
   <div class="food-categories my-3">
-      <div id="setting-expert">
-        {{#each expArr}}
-          {{#if this.value}}
-            <button  type="button" class="m-2 btn toggle-index on font-weight-bold">{{this.key}}</button>
-          {{else}}
-            <button type="button" class="btn toggle-index m-2 off font-weight-bold">{{this.key}}</button>
-          {{/if}}       
-        {{/each}}
-        </div>
+    <div id="setting-expert">
+      {{#each expArr}} {{#if this.value}}
+      <button type="button" class="m-2 btn toggle-index on font-weight-bold">{{this.key}}</button>
+      {{else}}
+      <button type="button" class="btn toggle-index m-2 off font-weight-bold">{{this.key}}</button>
+      {{/if}} {{/each}}
+    </div>
   </div>
   <div id="index-googlemap"></div>
 </div>

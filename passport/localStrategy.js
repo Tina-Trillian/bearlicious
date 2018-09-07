@@ -34,7 +34,6 @@ passport.use(new FacebookStrategy(
   {
     clientID: 244565082916525,
     clientSecret: '487df1dc3888fb8e797f0b5262de700c',
-    // callbackURL: "https://bearlicious.herokuapp.com/",
     callbackURL: "/auth/facebook/callback"
   }, function (accessToken, refreshToken, profile, cb) {
     User.findOne({ 'facebookProvider.id': profile.id }, (err, user) => {
