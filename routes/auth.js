@@ -112,6 +112,7 @@ authRoutes.get('/facebook', passport.authenticate('facebook'));
 // authentication process by attempting to obtain an access token.  If
 // access was granted, the user will be logged in.  Otherwise,
 // authentication has failed.
+
 authRoutes.get('/facebook/callback',
   passport.authenticate('facebook', {
     successRedirect: '/',
@@ -123,8 +124,8 @@ authRoutes.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
-authRoutes.get('/facebook',
-  passport.authenticate('facebook', { scope: ['read_stream', 'publish_actions'] })
-);
+// authRoutes.get('/facebook',
+//   passport.authenticate('facebook', { scope: ['read_stream', 'publish_actions'] })
+// );
 
 module.exports = authRoutes;
