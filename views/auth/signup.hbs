@@ -2,7 +2,7 @@
   <div class="back-white-content">
     <h2>Signup</h2>
 
-    <form action="/auth/signup" method="POST" id="form-container">
+    <form class="my-4" action="/auth/signup" method="POST" id="form-container">
       <label for="username">Username</label>
       <input id="username" type="text" name="username" placeholder="JonSnow">
 
@@ -21,16 +21,18 @@
       <div class="error-message">{{ message }}</div>
       {{/if}}
 
-      <br><br>
+      <br>
 
-      <button>Create account</button>
+      <button class="btn btn-primary">Create account</button>
 
-      <p class="account-message">
+    </form>
+        <p class="account-message">
         Do you already have an account?
         <a href="/auth/login">Login</a>
       </p>
-    </form>
-    <a href="/auth/facebook">Login with Facebook</a>
+      <p>
+        Login with <a href="/auth/facebook">Facebook</a>
+      </p>
   </div>
 
 </div>

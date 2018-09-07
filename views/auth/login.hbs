@@ -2,7 +2,7 @@
   <div class="back-white-content">
     <h2>Login</h2>
 
-    <form action="/auth/login" method="POST" id="form-container">
+    <form class="my-4" action="/auth/login" method="POST" id="form-container">
       <label for="email">Email</label>
       <input id="email" type="text" name="email" placeholder="bastard@winterfell.sk">
 
@@ -14,14 +14,12 @@
       <div class="error-message">{{ message }}</div>
       {{/if}}
 
-      <br><br>
+      <button class="mt-4 btn btn-primary">Login</button>
 
-      <button>Login</button>
-
-      <p class="account-message">
+    </form>
+     <p class="account-message">
         Don't have an account yet?
         <a href="/auth/login">Signup</a>
-      </p>
-    </form>
+     </p>
   </div>
 </div>

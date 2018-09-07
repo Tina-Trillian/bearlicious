@@ -6,14 +6,14 @@
       <input type="text" name="_id" class="hidden"value="{{restaurant._id}}">
       <h5>Your Recommendation</h5>
       <textarea rows="4" cols="50" name="comment">{{comment}}</textarea>
-      <div class="button-container">
+      <div class="button-container my-3">
         <ul id="setting-expert">
           {{#each expArr}} {{#if this.value}}
           <li class=“{{this.key}}”><button type="button" class="btn toggle on">{{this.key}}</button>
             {{else}}
             <li class=“{{this.key}}”><button type="button" class="btn toggle off">{{this.key}}</button>
               {{/if}} {{/each}}
-              <input name="category" class="hidden" id="expertIn" type="text">
+              <input name="category" id="expertIn" class="hidden" type="text">
         </ul>
       </div>
       <button class="btn btn-success" type='submit'>Save</button>

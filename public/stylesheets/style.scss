@@ -3,14 +3,27 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; 
 }
 a {
-  color: rgb(2, 142, 197); }
+  font-weight: bold;
+  color: rgb(85, 50, 211) }
 
 a:hover {
   text-decoration: none;
-  color: rgb(103, 203, 243); }
+  color: rgb(39, 10, 146) }
 
 .white-link {
   color: rgb(235, 226, 226);
+}
+
+.white-link:hover {
+  color:  rgb(101, 77, 185) ;
+}
+
+.title {
+  color: black;
+}
+
+.title:hover {
+  color: rgb(39, 10, 146)
 }
 
 h3 {
@@ -39,6 +52,11 @@ html {
   background-size: cover;
 }
 
+.btn {
+  font-weight: bold;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.521)
+}
+
 .btn:active,
 .btn:focus,
 .btn.active {
@@ -55,6 +73,11 @@ html {
 
 .dropdown button {
   color: white;
+  text-decoration: none !important;
+}
+
+.dropdown-item:hover {
+  background-color: lightgrey;
 }
 
 #dropdown-userpic {
@@ -74,17 +97,17 @@ nav > ul {
 
 .on {
   color:#fff;
-  background-color: rgb(214, 69, 69);
+  background-color:rgb(85, 50, 211)
 }
 .off {
   color: #fff;
-  background-color: rgb(156, 156, 156);
+  background-color: rgb(157, 130, 253)
 }
 // background image
 .bg {
   background-image: url(/images/bg2.jpg);
   padding-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 60px;
   width: 100%;
   height: 100%;
   display: flex;
@@ -112,6 +135,29 @@ nav > ul {
   color: white;
 }
 
+//colors 
+
+.btn-sign {
+  border: none;
+  font-weight: bold
+}
+
+.btn-sign.off:hover {
+  background-color:  rgb(89, 53, 219)
+}
+
+.btn-primary {
+  background-color: #117a5d;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #054b37;
+}
+
+.off-white {
+  color: #FBFBF2
+}
 // tagline for index page
 .tagline {
   text-align: center;
@@ -206,6 +252,20 @@ nav > ul {
   width: 100%;
 }
 
+input {
+  padding: 8px;
+  border: none;
+}
+
+textarea {
+  resize: none;
+  width: 100%;
+  height: 30vh;
+}
+
+ul {
+  padding-left: 0px;
+}
 
 
 .inputfile {
@@ -335,9 +395,12 @@ nav > ul {
 
 
 footer {
+  position:fixed;
+  bottom: 0px;
+  width: 100%;
+  height: 30px;
   text-align: center;
   background-color: #111;
   color: #fff;
   font-size: 0.8rem;
-  padding: 8px 0;
 }

@@ -1,12 +1,12 @@
   <div class="container-heading">
   <h1 class="headline-white">My Recommendations</h1>
-  <h4><a href="/foodie/{{user._id}}/recommendations/search">Add a recommendation</a></h4>
+  <h4><a class="white-link" href="/foodie/{{user._id}}/recommendations/search">Add a recommendation</a></h4>
    </div>
     <div>
       {{#each restaurants}}
       <div class="back-white mb-3">
       <div class="restaurant-card">
-        <a href="/restaurant/{{this._id}}"><h3>{{this.name}}</a></h3>
+        <h3><a class="title" href="/restaurant/{{this._id}}">{{this.name}}</a></h3>
         <div class="restaurant-image">
           <img src="{{this.picPath}}" alt="">
         </div>

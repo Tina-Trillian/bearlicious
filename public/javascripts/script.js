@@ -7,8 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
   //to toggle the button from "off" to "on" and add and remove values 
   //to the hidden intput, so it gets send with the req.body
 
-  if (window.location.href.indexOf('index')) {
+
+
+  if (!(["foodie", "restaurant", "auth"].some(el => window.location.href.includes(el))))
+      {
       startMap($(".on").text())
+      console.log("RIGHT SIDE")
 
       $(".toggle-index").on("click", function () {
         $(this).toggleClass("on off");
@@ -18,9 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
         let filter = $(".on").text()
         startMap(filter)
       })
-
-
-
   }
 
   //buttons need to be "pushed" if the User is expert in
