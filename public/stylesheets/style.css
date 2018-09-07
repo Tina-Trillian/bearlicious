@@ -160,8 +160,8 @@ nav > ul {
   text-align: center; }
 
 #profile-userimage {
-  width: 250px;
-  height: 250px;
+  width: 40vw;
+  height: 40vw;
   background-color: #333; }
 
 #profile-userimage img {
@@ -173,7 +173,11 @@ nav > ul {
   margin: 20px auto; }
 
 .restaurant-image {
-  width: 400px; }
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center; }
 
 .restaurant-image img {
   object-fit: contain;
@@ -279,7 +283,10 @@ ul {
   width: 100%;
   margin: 0 auto;
   padding: 10px 0;
-  text-align: center; }
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; }
 
 .back-white.setting {
   width: 70%;
@@ -297,7 +304,10 @@ ul {
 
 .restaurant-card {
   border-bottom: 5px solid #bbb;
-  text-align: center; }
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
 
 .restaurant-card:last-child {
   border-bottom: none; }
