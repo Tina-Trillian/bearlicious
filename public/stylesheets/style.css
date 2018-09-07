@@ -3,14 +3,24 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
 a {
-  color: #028ec5; }
+  font-weight: bold;
+  color: #5532d3; }
 
 a:hover {
   text-decoration: none;
-  color: #67cbf3; }
+  color: #270a92; }
 
 .white-link {
   color: #ebe2e2; }
+
+.white-link:hover {
+  color: #654db9; }
+
+.title {
+  color: black; }
+
+.title:hover {
+  color: #270a92; }
 
 h3 {
   font-size: 1.7em; }
@@ -33,6 +43,10 @@ html {
   -o-background-size: cover;
   background-size: cover; }
 
+.btn {
+  font-weight: bold;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.521); }
+
 .btn:active,
 .btn:focus,
 .btn.active {
@@ -46,7 +60,11 @@ html {
   flex-basis: 30%; }
 
 .dropdown button {
-  color: white; }
+  color: white;
+  text-decoration: none !important; }
+
+.dropdown-item:hover {
+  background-color: lightgrey; }
 
 #dropdown-userpic {
   width: 25px;
@@ -63,16 +81,16 @@ nav > ul {
 
 .on {
   color: #fff;
-  background-color: #d64545; }
+  background-color: #5532d3; }
 
 .off {
   color: #fff;
-  background-color: #9c9c9c; }
+  background-color: #9d82fd; }
 
 .bg {
   background-image: url(/images/bg2.jpg);
   padding-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 60px;
   width: 100%;
   height: 100%;
   display: flex;
@@ -93,6 +111,23 @@ nav > ul {
 
 .headline-white {
   color: white; }
+
+.btn-sign {
+  border: none;
+  font-weight: bold; }
+
+.btn-sign.off:hover {
+  background-color: #5935db; }
+
+.btn-primary {
+  background-color: #117a5d;
+  border: none; }
+
+.btn-primary:hover {
+  background-color: #054b37; }
+
+.off-white {
+  color: #FBFBF2; }
 
 .tagline {
   text-align: center;
@@ -156,6 +191,18 @@ nav > ul {
 
 #description {
   width: 100%; }
+
+input {
+  padding: 8px;
+  border: none; }
+
+textarea {
+  resize: none;
+  width: 100%;
+  height: 30vh; }
+
+ul {
+  padding-left: 0px; }
 
 .inputfile {
   background: none;
@@ -255,10 +302,13 @@ nav > ul {
   border-bottom: none; }
 
 footer {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  height: 30px;
   text-align: center;
   background-color: #111;
   color: #fff;
-  font-size: 0.8rem;
-  padding: 8px 0; }
+  font-size: 0.8rem; }
 
 /*# sourceMappingURL=style.css.map */

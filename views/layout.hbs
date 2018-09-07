@@ -14,11 +14,11 @@
   src='/javascripts/facebook-auth.js'></script> --}}
 
 <body>
-  <nav class="d-flex">
-    <h4><a href="/" class="white-link">Bearlicious</a></h4>
+  <nav class="d-flex align-items-center py-2">
+    <h4 class="my-0"><a href="/" class="off-white white-link font-weight-bold">Bearlicious</a></h4>
     {{#if user}}
 
-    <div class="dropdown">
+    <div class="dropdown d-flex justify-content-end">
       <div id="dropdown-userpic">
         {{#if user.picPath}}
         <img src="{{user.picPath}}" alt=""> {{else}}
@@ -37,9 +37,9 @@
       </div>
     </div>
     {{else}}
-    <ul>
-      <li><a href="/auth/login" class="btn btn-outline-secondary btn-sm">Log In</a></li>
-      <li><a href="/auth/signup" class="btn btn-secondary btn-sm">Sign Up</a></li>
+    <ul class="my-0 d-flex justify-content-end">
+      <li class="mx-2"><a href="/auth/login" class="off btn btn-sign btn-outline-secondary btn-sm">Log In</a></li>
+      <li><a href="/auth/signup" class="off btn btn-sign btn-secondary btn-sm">Sign Up</a></li>
     </ul>
     {{/if}}
   </nav>
@@ -48,8 +48,12 @@
     {{{body}}}
   </div>
 
+<<<<<<< HEAD
   <footer>&copy Bearlicious 2018 | <a href="/about/">About</a></footer>
 
+=======
+  <footer class="d-flex align-items-center justify-content-center">&copy Bearlicious 2018 | <a class="ml-2" href="/about/">About</a></footer>
+>>>>>>> e413e3020a537002d612f527793def6a0cc8a5e3
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
