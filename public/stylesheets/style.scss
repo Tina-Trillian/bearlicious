@@ -122,9 +122,13 @@ nav > ul {
   background-color: rgba(255, 255, 255, 0.8);
   margin: 0 auto;
   // width: auto;
-  width:100%;
+  width:70%;
   border-radius: 10px;
   padding: 40px;
+
+  @media (max-width: 1000px) {
+    width: 90%
+}
 }
 
 //content box to center content in the middle
@@ -376,13 +380,13 @@ ul {
 }
 
 .back-white.setting {
-  width: 70%;
+  width: 90%;
   padding: 0px;
 }
 
-.back-white.create {
-  width: 70%;
-}
+// .back-white.create {
+//   width: 70%;
+// }
 
 .search-card {
   background-color: rgba(117, 117, 117, 0.301);
@@ -424,4 +428,8 @@ footer {
 #login-btn {
   background:none;
   border: 1px solid #9d82fd;
+}
+
+.test {
+  width: 100%;
 }
