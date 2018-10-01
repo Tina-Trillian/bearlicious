@@ -22,6 +22,6 @@ yelp api with help from the npm package yelp fusion. The restaurant is then disp
 home page. Which is public and visible to all visitors. When a visitor wants to add a recommendation, or save a bookmark
 they need to sign up.
 
-![screenshot] (
+![screenshot](
      /public/images/home.png
     )
